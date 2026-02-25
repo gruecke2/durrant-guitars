@@ -1,0 +1,246 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import heroImage from "../assets/images/site/Catalog Photos/Grifter/Copy of Guitar3-9.JPG";
+import secondaryImage from "../assets/images/site/Catalog Photos/Racketeer/Copy of Guitar1-4.jpg";
+import thirdImage from "../assets/images/site/Catalog Photos/Con Artist/Copy of Guitar2-8.jpg";
+
+// Note: ensure we import some beautiful typography and colors
+const title = "Durrant Guitars";
+---
+
+<Layout title="Custom Handcrafted Guitars">
+    <!-- Hero Section -->
+    <section
+        class="relative h-[90vh] flex items-center justify-center overflow-hidden"
+    >
+        <div class="absolute inset-0 z-0">
+            <Image
+                src={heroImage}
+                alt="Custom Durrant Guitar"
+                class="w-full h-full object-cover object-center opacity-40 scale-105 transform hover:scale-100 transition-transform duration-[10s]"
+                loading="eager"
+            />
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"
+            >
+            </div>
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background/50"
+            >
+            </div>
+        </div>
+
+        <div
+            class="relative z-10 container mx-auto text-center px-4 max-w-4xl pt-20"
+        >
+            <h1
+                class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 opacity-0 animate-fade-in-up"
+                style="animation-delay: 0.2s; animation-fill-mode: forwards;"
+            >
+                Mastery in <br /><span class="text-gray-300 italic"
+                    >Every Detail</span
+                >
+            </h1>
+            <p
+                class="text-lg md:text-xl text-gray-300 mb-10 tracking-wide font-light max-w-2xl mx-auto opacity-0 animate-fade-in-up"
+                style="animation-delay: 0.5s; animation-fill-mode: forwards;"
+            >
+                Bespoke instruments crafted for those who demand excellence and
+                uncompromising tone.
+            </p>
+            <div
+                class="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0 animate-fade-in-up"
+                style="animation-delay: 0.8s; animation-fill-mode: forwards;"
+            >
+                <a
+                    href="/catalog"
+                    class="btn btn-primary w-full sm:w-auto text-sm tracking-widest uppercase font-semibold"
+                >
+                    Explore Models
+                </a>
+                <a
+                    href="/create-yours"
+                    class="btn btn-outline w-full sm:w-auto text-sm tracking-widest uppercase font-semibold backdrop-blur-sm"
+                >
+                    Commission a Build
+                </a>
+            </div>
+        </div>
+
+        <div
+            class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 animate-fade-in-up"
+            style="animation-delay: 1.2s; animation-fill-mode: forwards;"
+        >
+            <span class="text-xs uppercase tracking-[0.2em] text-gray-400"
+                >Discover</span
+            >
+            <div
+                class="w-[1px] h-12 bg-gradient-to-b from-gray-400 to-transparent"
+            >
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduce the Craft -->
+    <section class="py-32 bg-background relative z-10 text-center">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h2 class="font-serif text-3xl md:text-5xl text-white mb-8 reveal">
+                Not Just Another Guitar.
+            </h2>
+            <div class="w-16 h-[1px] bg-white/30 mx-auto mb-8 reveal delay-100">
+            </div>
+            <p
+                class="text-gray-400 text-lg md:text-xl leading-relaxed font-light reveal delay-200"
+            >
+                Every Durrant guitar is a dialogue between the luthier and the
+                artist. We don't mass-produce formulas; we source exceptional
+                tone woods, craft custom-wound electronics, and obsess over the
+                geometry of every neck. The result is an instrument that feels
+                alive in your hands.
+            </p>
+        </div>
+    </section>
+
+    <!-- Featured Models -->
+    <section class="py-24 bg-surface relative">
+        <div class="container mx-auto px-4">
+            <div
+                class="flex flex-col md:flex-row justify-between items-end mb-16 reveal"
+            >
+                <div>
+                    <span
+                        class="text-xs tracking-[0.2em] uppercase text-gray-400 mb-2 block"
+                        >The Collection</span
+                    >
+                    <h2 class="font-serif text-4xl text-white">
+                        Featured Models
+                    </h2>
+                </div>
+                <a
+                    href="/catalog"
+                    class="group flex items-center gap-2 text-sm text-white uppercase tracking-wider font-semibold hover:text-gray-300 transition-colors mt-6 md:mt-0"
+                >
+                    View All Models
+                    <span
+                        class="transform group-hover:translate-x-1 transition-transform"
+                        >→</span
+                    >
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Featured Card 1 -->
+                <a
+                    href="/catalog/grifter"
+                    class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-surface-light reveal delay-100"
+                >
+                    <Image
+                        src={heroImage}
+                        alt="The Grifter"
+                        class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
+                    />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"
+                    >
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full">
+                        <span
+                            class="text-xs tracking-[0.2em] uppercase text-gray-400 mb-2 block border-l-2 border-white pl-3"
+                            >The Tele Style</span
+                        >
+                        <h3 class="font-serif text-3xl text-white mb-3">
+                            The Grifter
+                        </h3>
+                        <p
+                            class="text-gray-300 text-sm font-light opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+                        >
+                            The honest con. Classic punch with modernized
+                            ergonomics.
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Featured Card 2 -->
+                <a
+                    href="/catalog/racketeer"
+                    class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-surface-light reveal delay-200"
+                >
+                    <Image
+                        src={secondaryImage}
+                        alt="The Racketeer"
+                        class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
+                    />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"
+                    >
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full">
+                        <span
+                            class="text-xs tracking-[0.2em] uppercase text-gray-400 mb-2 block border-l-2 border-white pl-3"
+                            >The Offset</span
+                        >
+                        <h3 class="font-serif text-3xl text-white mb-3">
+                            The Racketeer
+                        </h3>
+                        <p
+                            class="text-gray-300 text-sm font-light opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+                        >
+                            Smooth, sweeping lines. Deep, resonant tone.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Available Now CTA -->
+    <section class="py-32 relative overflow-hidden bg-background">
+        <div class="absolute inset-0 z-0">
+            <Image
+                src={thirdImage}
+                alt="Available Guitars"
+                class="w-full h-full object-cover opacity-20"
+            />
+            <div class="absolute inset-0 bg-black/60"></div>
+        </div>
+        <div class="relative z-10 container mx-auto px-4 text-center">
+            <h2 class="font-serif text-4xl md:text-5xl text-white mb-6 reveal">
+                Ready to Ship.
+            </h2>
+            <p
+                class="text-gray-300 mb-10 max-w-xl mx-auto text-lg font-light reveal delay-100"
+            >
+                Don't want to wait for a custom build? Browse our current
+                inventory of handcrafted guitars, available now.
+            </p>
+            <div class="reveal delay-200 inline-block">
+                <a
+                    href="/available"
+                    class="btn bg-white text-black hover:bg-gray-200 uppercase tracking-widest text-sm font-semibold px-8"
+                >
+                    Shop Available Inventory
+                </a>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    @keyframes fade-in-up {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation-name: fade-in-up;
+        animation-duration: 0.8s;
+        animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+</style>

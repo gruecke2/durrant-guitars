@@ -1,0 +1,20 @@
+{
+    "name": "Racketeer",
+    "slug": "racketeer",
+    "style": "Offset",
+    "tagline": "Smooth lines. Deep tone.",
+    "description": "An offset design inspired by the Jazzmaster. The Racketeer offers exceptional comfort standing or sitting. With its unique pickup options and floating vibrato tailpiece, it's perfect for expansive textures and shoegaze resonance.",
+    "startingPrice": 1950,
+    "specs": {
+        "body": "Alder",
+        "neck": "Maple, C-Profile",
+        "fretboard": "Rosewood",
+        "pickups": "P90s or Jazzmaster Vintage-spec",
+        "bridge": "Mastery or Vintage Floating Tremolo"
+    },
+    "images": [
+        "../../assets/images/site/Catalog Photos/Racketeer/Copy of Guitar1-7.jpg",
+        "../../assets/images/site/Catalog Photos/Racketeer/Copy of Guitar1-4.jpg",
+        "../../assets/images/site/Catalog Photos/Racketeer/Copy of Guitar1-5.jpg"
+    ]
+}

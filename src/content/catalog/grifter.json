@@ -1,0 +1,20 @@
+{
+  "name": "Grifter",
+  "slug": "grifter",
+  "style": "Tele",
+  "tagline": "The honest con.",
+  "description": "A Telecaster-inspired build with Durrant DNA. Classic punch with modernized ergonomics, comfortable contours, and hand-wound vintage-style pickups. The Grifter thrives on country twang, blues grit, and indie-rock chime.",
+  "startingPrice": 1800,
+  "specs": {
+    "body": "Alder or Ash",
+    "neck": "Roasted Maple",
+    "fretboard": "Maple or Rosewood",
+    "pickups": "Custom wound single-coils",
+    "bridge": "3-saddle brass or 6-saddle steel"
+  },
+  "images": [
+    "../../assets/images/site/Catalog Photos/Grifter/Copy of Guitar3-8.JPG",
+    "../../assets/images/site/Catalog Photos/Grifter/Copy of Guitar3-9.JPG",
+    "../../assets/images/site/Catalog Photos/Grifter/Copy of Guitar3-4.jpg"
+  ]
+}

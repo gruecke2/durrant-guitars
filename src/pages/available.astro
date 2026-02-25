@@ -1,0 +1,116 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+// Get both available and sold inventory, sort by availability
+const allInventory = await getCollection("available");
+const sortedInventory = allInventory.sort((a, b) => {
+    if (a.data.status === "available" && b.data.status !== "available")
+        return -1;
+    if (a.data.status !== "available" && b.data.status === "available")
+        return 1;
+    return 0;
+});
+---
+
+<Layout
+    title="Available Inventory | Durrant Guitars"
+    description="Shop currently available Durrant custom guitars, ready to ship today."
+>
+    <div class="bg-background pt-32 pb-24">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h1
+                class="font-serif text-5xl md:text-6xl text-white mb-6 text-center"
+            >
+                Available Inventory
+            </h1>
+            <p
+                class="text-gray-400 text-center max-w-2xl mx-auto text-lg mb-20 font-light"
+            >
+                Instruments built without commission, ready for immediate
+                shipment.
+            </p>
+
+            {
+                sortedInventory.length === 0 ? (
+                    <div class="text-center py-20 border border-white/10 bg-surface rounded-sm">
+                        <p class="text-gray-400 mb-6">
+                            There are currently no instruments available.
+                        </p>
+                        <a
+                            href="/create-yours"
+                            class="btn btn-outline text-xs uppercase tracking-widest"
+                        >
+                            Start a Custom Build instead
+                        </a>
+                    </div>
+                ) : (
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {sortedInventory.map((item, index) => (
+                            <div
+                                class={`bg-surface border border-white/5 rounded-sm overflow-hidden flex flex-col ${item.data.status === "sold" ? "opacity-60" : ""} reveal delay-${((index % 3) + 1) * 100}`}
+                            >
+                                <div class="relative aspect-[4/3] bg-surface-light overflow-hidden">
+                                    {item.data.status === "sold" && (
+                                        <div class="absolute inset-x-0 top-1/2 -mt-4 text-center z-20 transform -rotate-12">
+                                            <span class="inline-block bg-black/80 text-white border border-white/20 uppercase tracking-[0.3em] font-bold text-lg px-8 py-2">
+                                                SOLD
+                                            </span>
+                                        </div>
+                                    )}
+                                    <Image
+                                        src={item.data.images[0]}
+                                        alt={item.data.name}
+                                        class={`w-full h-full object-cover transition-transform duration-700 ${item.data.status === "available" ? "hover:scale-105" : ""}`}
+                                    />
+                                </div>
+                                <div class="flex flex-col flex-grow p-6">
+                                    <span class="text-xs uppercase tracking-widest text-gray-500 mb-2">
+                                        {item.data.model}
+                                    </span>
+                                    <h3 class="font-serif text-xl text-white mb-3">
+                                        {item.data.name}
+                                    </h3>
+                                    <p class="text-sm text-gray-400 font-light leading-relaxed mb-6 flex-grow line-clamp-3">
+                                        {item.data.description}
+                                    </p>
+
+                                    <div class="pt-6 mt-auto border-t border-white/10 flex items-center justify-between">
+                                        <span class="text-lg text-white font-medium">
+                                            ${item.data.price.toLocaleString()}
+                                        </span>
+                                        {item.data.status === "available" ? (
+                                            item.data.stripePaymentLink ? (
+                                                <a
+                                                    href={
+                                                        item.data
+                                                            .stripePaymentLink
+                                                    }
+                                                    class="btn bg-white text-black hover:bg-gray-200 text-xs px-5 py-2 uppercase tracking-wide font-semibold"
+                                                >
+                                                    Buy Now
+                                                </a>
+                                            ) : (
+                                                <a
+                                                    href="/contact"
+                                                    class="btn btn-outline text-xs px-5 py-2 uppercase tracking-wide font-semibold"
+                                                >
+                                                    Inquire
+                                                </a>
+                                            )
+                                        ) : (
+                                            <span class="text-xs uppercase tracking-widest text-gray-500 font-semibold">
+                                                Sold Out
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )
+            }
+        </div>
+    </div>
+</Layout>

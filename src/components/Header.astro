@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+import logoSquare from '../assets/images/logo/IMG_1591.JPEG';
+---
+<header class="sticky top-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10">
+    <div class="container mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+            <Image src={logoSquare} alt="Durrant Guitars Logo" class="h-10 w-10 object-contain" />
+            <span class="font-serif text-xl tracking-wider font-semibold text-white">DURRANT</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide uppercase text-gray-300">
+            <a href="/catalog" class="hover:text-white transition-colors">Models</a>
+            <a href="/available" class="hover:text-white transition-colors">Available</a>
+            <a href="/gallery" class="hover:text-white transition-colors">Gallery</a>
+            <a href="/about" class="hover:text-white transition-colors">About</a>
+            <a href="/create-yours" class="bg-white text-black px-5 py-2.5 rounded-sm hover:bg-gray-200 transition-colors font-semibold">Custom Build</a>
+        </nav>
+        <button class="md:hidden text-white" aria-label="Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+    </div>
+</header>

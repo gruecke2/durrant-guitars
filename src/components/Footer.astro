@@ -1,0 +1,31 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="bg-[#171717] text-gray-400 py-16 border-t border-white/5 mt-20">
+    <div class="container mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div class="md:col-span-2">
+            <h3 class="font-serif text-2xl text-white mb-4">Durrant Guitars</h3>
+            <p class="max-w-md text-sm leading-relaxed">Premium custom guitars handcrafted to your exact specifications. Every instrument tells a story, built with uncompromising quality and bold design.</p>
+        </div>
+        <div>
+            <h4 class="text-white font-medium mb-6 uppercase tracking-wider text-xs">Explore</h4>
+            <ul class="space-y-3 text-sm">
+                <li><a href="/catalog" class="hover:text-white transition-colors">Models</a></li>
+                <li><a href="/available" class="hover:text-white transition-colors">Available Inventory</a></li>
+                <li><a href="/gallery" class="hover:text-white transition-colors">Gallery</a></li>
+                <li><a href="/about" class="hover:text-white transition-colors">About Tom</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-white font-medium mb-6 uppercase tracking-wider text-xs">Connect</h4>
+            <ul class="space-y-3 text-sm">
+                <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="https://instagram.com" target="_blank" class="hover:text-white transition-colors">Instagram</a></li>
+                <li><a href="mailto:tom@durrantguitars.com" class="hover:text-white transition-colors">tom@durrantguitars.com</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between text-xs tracking-wide">
+        <p>&copy; {year} Durrant Custom Guitars. All rights reserved.</p>
+    </div>
+</footer>

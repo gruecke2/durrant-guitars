@@ -1,0 +1,19 @@
+{
+    "name": "Charlatan",
+    "slug": "charlatan",
+    "style": "Double Cut",
+    "tagline": "Sleek and aggressive.",
+    "description": "An SG-inspired double cutaway. Lightweight, fast, and aggressive. The Charlatan is the ultimate rock machine with unparalleled upper fret access.",
+    "startingPrice": 1900,
+    "specs": {
+        "body": "Mahogany",
+        "neck": "Mahogany, Slim Taper",
+        "fretboard": "Rosewood",
+        "pickups": "High-output Humbuckers or P90s",
+        "bridge": "Tune-O-Matic or Wraparound"
+    },
+    "images": [
+        "../../assets/images/site/Past Build Photos/Copy of Guitar4-1.jpg",
+        "../../assets/images/site/Past Build Photos/Copy of Guitar4-2.jpg"
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "name": "Swindler",
+    "slug": "swindler",
+    "style": "S-Style",
+    "tagline": "The versatile classic.",
+    "description": "Our take on the timeless Stratocaster shape. Three pickups, five positions, and infinite possibilities. The Swindler ranges from bell-like cleans to biting leads.",
+    "startingPrice": 1850,
+    "specs": {
+        "body": "Alder or Swamp Ash",
+        "neck": "Maple, Modern C",
+        "fretboard": "Maple or Rosewood",
+        "pickups": "S-S-S or H-S-S Custom Wound",
+        "bridge": "Vintage Synchronized Tremolo"
+    },
+    "images": [
+        "../../assets/images/site/Past Build Photos/Copy of Guitar5-1.jpg",
+        "../../assets/images/site/Past Build Photos/Copy of Guitar5-2.JPG"
+    ]
+}

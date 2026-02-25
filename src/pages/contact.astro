@@ -1,0 +1,145 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="Contact | Durrant Guitars"
+    description="Get in touch with Tom Durrant for general inquiries."
+>
+    <div class="bg-background pt-32 pb-24">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h1
+                class="font-serif text-5xl md:text-6xl text-white mb-6 text-center"
+            >
+                Contact
+            </h1>
+            <p
+                class="text-gray-400 text-center max-w-2xl mx-auto text-lg mb-16 font-light"
+            >
+                Have a question about an available instrument or a general
+                inquiry? Reach out below.
+                <br /><br />
+                <span
+                    class="text-xs uppercase tracking-widest text-white border-b border-white pb-1"
+                    >Note:</span
+                > If you are looking to commission a custom build, please use the
+                <a href="/create-yours" class="text-white hover:text-gray-300"
+                    >Custom Order Form</a
+                > instead.
+            </p>
+
+            <div
+                class="bg-surface p-8 md:p-12 rounded-sm border border-white/5 max-w-2xl mx-auto reveal delay-100"
+            >
+                <!-- Using Formsubmit.co for the simple contact form as recommended -->
+                <form
+                    action="https://formsubmit.co/tom@durrantguitars.com"
+                    method="POST"
+                    class="space-y-6"
+                >
+                    <!-- Setup Formsubmit -->
+                    <input
+                        type="hidden"
+                        name="_subject"
+                        value="New Contact Inquiry — Durrant Guitars"
+                    />
+                    <input type="text" name="_honey" style="display:none" />
+                    <input type="hidden" name="_captcha" value="false" />
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label
+                                for="name"
+                                class="block text-sm font-medium text-gray-300 mb-2"
+                                >Name</label
+                            >
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                required
+                                class="w-full bg-surface-light border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 transition-colors"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                for="email"
+                                class="block text-sm font-medium text-gray-300 mb-2"
+                                >Email</label
+                            >
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                class="w-full bg-surface-light border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 transition-colors"
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label
+                            for="message"
+                            class="block text-sm font-medium text-gray-300 mb-2"
+                            >Message</label
+                        >
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="5"
+                            required
+                            class="w-full bg-surface-light border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 transition-colors resize-y"
+                        ></textarea>
+                    </div>
+
+                    <div class="pt-6">
+                        <button
+                            type="submit"
+                            class="btn btn-outline w-full md:w-auto px-12 uppercase tracking-widest text-sm font-semibold"
+                        >
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div
+                class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-sm text-gray-400 reveal delay-200"
+            >
+                <div>
+                    <h3
+                        class="text-white font-medium uppercase tracking-widest text-xs mb-3"
+                    >
+                        Email
+                    </h3>
+                    <a
+                        href="mailto:tom@durrantguitars.com"
+                        class="hover:text-white transition-colors"
+                        >tom@durrantguitars.com</a
+                    >
+                </div>
+                <div>
+                    <h3
+                        class="text-white font-medium uppercase tracking-widest text-xs mb-3"
+                    >
+                        Workshop
+                    </h3>
+                    <p>Salt Lake City, UT<br />Visits by appointment only.</p>
+                </div>
+                <div>
+                    <h3
+                        class="text-white font-medium uppercase tracking-widest text-xs mb-3"
+                    >
+                        Social
+                    </h3>
+                    <a
+                        href="https://instagram.com/durrantguitars"
+                        target="_blank"
+                        class="hover:text-white transition-colors"
+                        >@durrantguitars</a
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>

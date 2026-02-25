@@ -1,0 +1,20 @@
+{
+    "name": "Con Artist",
+    "slug": "con-artist",
+    "style": "Single Cut",
+    "tagline": "Classic humbucker power.",
+    "description": "A Les Paul-inspired single cutaway. The Con Artist is built for sustain and thick, creamy overtones. Carved maple top over a mahogany back provides the perfect balance of bite and warmth.",
+    "startingPrice": 2200,
+    "specs": {
+        "body": "Mahogany with Maple Cap",
+        "neck": "Mahogany, 50s Fat or 60s Slim",
+        "fretboard": "Rosewood or Ebony",
+        "pickups": "Vintage PAF style humbuckers",
+        "bridge": "Tune-O-Matic"
+    },
+    "images": [
+        "../../assets/images/site/Catalog Photos/Con Artist/Copy of Guitar2-4.jpg",
+        "../../assets/images/site/Catalog Photos/Con Artist/Copy of Guitar2-8.jpg",
+        "../../assets/images/site/Catalog Photos/Con Artist/Copy of Guitar2-6.JPG"
+    ]
+}

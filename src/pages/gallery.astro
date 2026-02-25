@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+// Fetch gallery builds and flatten all images into a single array with metadata
+const builds = await getCollection('gallery');
+
+// Sort builds by date descending
+const sortedBuilds = builds.sort((a, b) => {
+    return new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime();
+});
+---
+
+<Layout title="Gallery | Durrant Guitars" description="View our portfolio of custom handcrafted guitars.">
+    <div class="bg-background pt-32 pb-24">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <h1 class="font-serif text-5xl md:text-6xl text-white mb-6 text-center">The Gallery</h1>
+            <p class="text-gray-400 text-center max-w-2xl mx-auto text-lg mb-20 font-light">
+                A selection of recent builds, custom combinations, and unique creations from the workshop.
+            </p>
+
+            <div class="space-y-32">
+                {sortedBuilds.map((build, index) => (
+                    <div>
+                        <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-4">
+                            <div>
+                                <h2 class="font-serif text-3xl text-white mb-2">{build.data.title}</h2>
+                                <p class="text-gray-400 font-light max-w-3xl">{build.data.description}</p>
+                            </div>
+                            {build.data.model && (
+                                <a href={`/catalog/${build.data.model.toLowerCase().replace(' ', '-')}`} class="text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-colors">
+                                    Base Model: {build.data.model}
+                                </a>
+                            )}
+                        </div>
+                        
+                        <!-- Lightbox Gallery Container -->
+                        <div class="pswp-gallery grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id={`gallery-${index}`}>
+                            {build.data.images.map((img: any, i: number) => (
+                                <a 
+                                    href={img.src} 
+                                    data-pswp-width={img.width} 
+                                    data-pswp-height={img.height} 
+                                    target="_blank"
+                                    class="group relative aspect-[4/5] overflow-hidden rounded-sm bg-surface"
+                                >
+                                    <span class="absolute inset-0 z-10 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-8 h-8">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                        </svg>
+                                    </span>
+                                    <Image 
+                                        src={img} 
+                                        alt={`${build.data.title} image ${i + 1}`} 
+                                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 transform-gpu backface-visibility-hidden will-change-transform"
+                                        loading={index === 0 && i < 4 ? "eager" : "lazy"}
+                                    />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
+            <div class="mt-32 text-center p-12 border border-white/5 bg-surface rounded-sm">
+                <h3 class="font-serif text-3xl text-white mb-4">Inspired?</h3>
+                <p class="text-gray-400 max-w-xl mx-auto mb-8 font-light">Every build starts with a conversation. Let's build your dream instrument.</p>
+                <a href="/create-yours" class="btn btn-primary px-8 uppercase tracking-widest text-xs font-semibold">Start the Process</a>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Initialize lightboxes for each gallery grid
+    const galleries = document.querySelectorAll('.pswp-gallery');
+    
+    galleries.forEach((gallery) => {
+        const lightbox = new PhotoSwipeLightbox({
+            gallery: '#' + gallery.id,
+            children: 'a',
+            pswpModule: () => import('photoswipe'),
+            paddingFn: (viewportSize) => {
+                return {
+                    top: 30, bottom: 30, left: 30, right: 30
+                }
+            }
+        });
+        lightbox.init();
+    });
+  });
+</script>
