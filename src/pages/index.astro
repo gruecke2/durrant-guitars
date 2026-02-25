@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import heroImage from "../assets/images/site/Catalog Photos/Grifter/Copy of Guitar3-9.JPG";
+import heroImage from "../assets/images/site/Durrant Head Stock Photos/Live1-8.JPG";
 import secondaryImage from "../assets/images/site/Catalog Photos/Racketeer/Copy of Guitar1-4.jpg";
 import thirdImage from "../assets/images/site/Catalog Photos/Con Artist/Copy of Guitar2-8.jpg";
 
@@ -12,21 +12,26 @@ const title = "Durrant Guitars";
 <Layout title="Custom Handcrafted Guitars">
     <!-- Hero Section -->
     <section
-        class="relative h-[90vh] flex items-center justify-center overflow-hidden"
+        class="relative min-h-[600px] h-[75vh] max-h-[900px] flex items-center justify-center overflow-hidden"
     >
-        <div class="absolute inset-0 z-0">
-            <Image
-                src={heroImage}
-                alt="Custom Durrant Guitar"
-                class="w-full h-full object-cover object-center opacity-40 scale-105 transform hover:scale-100 transition-transform duration-[10s]"
-                loading="eager"
-            />
+        <div
+            class="absolute inset-0 z-0 bg-black flex justify-center overflow-hidden"
+        >
+            <div class="relative w-full h-full max-w-[1545px]">
+                <Image
+                    src={heroImage}
+                    alt="Custom Durrant Guitar"
+                    class="w-full h-full object-cover opacity-50 scale-105 transform hover:scale-100 transition-transform duration-[10s]"
+                    style="object-position: center 35%;"
+                    loading="eager"
+                />
+            </div>
             <div
-                class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"
+                class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"
             >
             </div>
             <div
-                class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background/50"
+                class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background/30"
             >
             </div>
         </div>
@@ -196,13 +201,15 @@ const title = "Durrant Guitars";
 
     <!-- Available Now CTA -->
     <section class="py-32 relative overflow-hidden bg-background">
+        <div
+            class="absolute inset-0 z-0 bg-noise opacity-30 mix-blend-overlay pointer-events-none"
+        >
+        </div>
         <div class="absolute inset-0 z-0">
-            <Image
-                src={thirdImage}
-                alt="Available Guitars"
-                class="w-full h-full object-cover opacity-20"
-            />
-            <div class="absolute inset-0 bg-black/60"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/40"
+            >
+            </div>
         </div>
         <div class="relative z-10 container mx-auto px-4 text-center">
             <h2 class="font-serif text-4xl md:text-5xl text-white mb-6 reveal">
@@ -242,5 +249,10 @@ const title = "Durrant Guitars";
         animation-name: fade-in-up;
         animation-duration: 0.8s;
         animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* SVG Grain Noise for deep texture */
+    .bg-noise {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 </style>

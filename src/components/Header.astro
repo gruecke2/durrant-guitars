@@ -1,24 +1,327 @@
 ---
-import { Image } from 'astro:assets';
-import logoSquare from '../assets/images/logo/IMG_1591.JPEG';
+import { Image } from "astro:assets";
+import logoSquare from "../assets/images/logo/logo_only.JPEG";
 ---
-<header class="sticky top-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10">
-    <div class="container mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-3">
-            <Image src={logoSquare} alt="Durrant Guitars Logo" class="h-10 w-10 object-contain" />
-            <span class="font-serif text-xl tracking-wider font-semibold text-white">DURRANT</span>
+
+<header id="site-header">
+    <div class="header-inner">
+        <!-- Logo -->
+        <a href="/" class="logo-link">
+            <Image
+                src={logoSquare}
+                alt="Durrant Guitars Logo"
+                class="logo-img"
+            />
+            <span class="logo-text">DURRANT</span>
         </a>
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide uppercase text-gray-300">
-            <a href="/catalog" class="hover:text-white transition-colors">Models</a>
-            <a href="/available" class="hover:text-white transition-colors">Available</a>
-            <a href="/gallery" class="hover:text-white transition-colors">Gallery</a>
-            <a href="/about" class="hover:text-white transition-colors">About</a>
-            <a href="/create-yours" class="bg-white text-black px-5 py-2.5 rounded-sm hover:bg-gray-200 transition-colors font-semibold">Custom Build</a>
+
+        <!-- Desktop Nav -->
+        <nav class="desktop-nav">
+            <a href="/catalog">Models</a>
+            <a href="/available">Available</a>
+            <a href="/gallery">Gallery</a>
+            <a href="/about">About</a>
+            <a href="/create-yours" class="cta-btn">Custom Build</a>
         </nav>
-        <button class="md:hidden text-white" aria-label="Menu">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
+
+        <!-- Hamburger / X button -->
+        <button
+            id="menu-toggle"
+            class="menu-toggle"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+        >
+            <span class="bar bar-top"></span>
+            <span class="bar bar-mid"></span>
+            <span class="bar bar-bot"></span>
         </button>
     </div>
 </header>
+
+<!-- Full-screen mobile nav overlay -->
+<div id="mobile-overlay" class="mobile-overlay" aria-hidden="true">
+    <nav class="mobile-nav">
+        <a href="/catalog" class="mobile-link" style="--i:0">Models</a>
+        <a href="/available" class="mobile-link" style="--i:1">Available</a>
+        <a href="/gallery" class="mobile-link" style="--i:2">Gallery</a>
+        <a href="/about" class="mobile-link" style="--i:3">About</a>
+        <a href="/create-yours" class="mobile-link mobile-cta" style="--i:4"
+            >Custom Build</a
+        >
+    </nav>
+</div>
+
+<style>
+    /* ── Base header ─────────────────────────────────────────── */
+    #site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(10, 10, 10, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        height: 68px; /* fixed height — never shifts */
+    }
+
+    /* ── Logo ────────────────────────────────────────────────── */
+    .logo-link {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        position: relative;
+        z-index: 1001; /* stays above overlay */
+    }
+
+    .logo-img {
+        height: 2.5rem;
+        width: 2.5rem;
+        object-fit: contain;
+    }
+
+    .logo-text {
+        font-family: Georgia, serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        color: #fff;
+    }
+
+    /* ── Desktop nav ─────────────────────────────────────────── */
+    .desktop-nav {
+        display: none;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .desktop-nav {
+            display: flex;
+        }
+        .menu-toggle {
+            display: none;
+        }
+    }
+
+    .desktop-nav a {
+        color: #aaa;
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+    }
+
+    .desktop-nav a:hover {
+        color: #fff;
+    }
+
+    .cta-btn {
+        background: #fff;
+        color: #000 !important;
+        padding: 0.6rem 1.25rem;
+        border-radius: 2px;
+        font-weight: 600;
+        transition: background 0.2s !important;
+    }
+
+    .cta-btn:hover {
+        background: #e0e0e0 !important;
+    }
+
+    /* ── Hamburger button ────────────────────────────────────── */
+    .menu-toggle {
+        /* use position:relative + absolute bars so translateY math is exact */
+        position: relative;
+        z-index: 1001;
+        width: 2rem;
+        height: 2rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .bar {
+        display: block;
+        position: absolute;
+        left: 0;
+        width: 22px;
+        height: 1.5px;
+        background: #fff;
+        border-radius: 1px;
+        transform-origin: center;
+        /* single consistent transition on all bars */
+        transition:
+            transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+            opacity 0.2s ease;
+    }
+
+    /* place bars at exact pixel positions: top=7, mid=15, bot=23 (of 30px) */
+    .bar-top {
+        top: 7px;
+    }
+    .bar-mid {
+        top: 15px;
+    }
+    .bar-bot {
+        top: 23px;
+    }
+
+    /* ── Open state: bars morph to × ────────────────────────── */
+    /* top + bot each move to the mid-point (15px) then rotate */
+    .menu-toggle.is-open .bar-top {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .menu-toggle.is-open .bar-mid {
+        opacity: 0;
+        /* no scaleX — just fade, avoids sub-pixel rendering jitter */
+    }
+    .menu-toggle.is-open .bar-bot {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* ── Mobile overlay — mobile only ───────────────────────── */
+    .mobile-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background: #0a0a0a;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        /* hidden state */
+        clip-path: inset(0 0 100% 0);
+        transition: clip-path 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+        pointer-events: none;
+    }
+
+    .mobile-overlay.is-open {
+        clip-path: inset(0 0 0% 0);
+        pointer-events: all;
+    }
+
+    /* never show on desktop, even if JS mishap triggers open() */
+    @media (min-width: 768px) {
+        .mobile-overlay {
+            display: none !important;
+        }
+    }
+
+    /* ── Mobile nav links ────────────────────────────────────── */
+    .mobile-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.25rem;
+        padding: 2rem;
+    }
+
+    .mobile-link {
+        color: #fff;
+        text-decoration: none;
+        font-family: Georgia, serif;
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        position: relative;
+
+        /* each link fades + rises in, with staggered delay via --i */
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+            opacity 0.4s ease calc(var(--i) * 65ms + 0.2s),
+            transform 0.4s ease calc(var(--i) * 65ms + 0.2s),
+            color 0.2s;
+    }
+
+    /* underline sweep on hover */
+    .mobile-link::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: #fff;
+        transition: width 0.3s ease;
+    }
+    .mobile-link:hover::after {
+        width: 100%;
+    }
+    .mobile-link:hover {
+        color: #ccc;
+    }
+
+    .mobile-overlay.is-open .mobile-link {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .mobile-cta {
+        margin-top: 0.75rem;
+        font-family: system-ui, sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        background: #fff;
+        color: #000 !important;
+        padding: 1rem 2.5rem;
+        border-radius: 2px;
+        transition:
+            background 0.2s,
+            opacity 0.4s ease calc(var(--i) * 65ms + 0.2s),
+            transform 0.4s ease calc(var(--i) * 65ms + 0.2s) !important;
+    }
+
+    .mobile-cta::after {
+        display: none;
+    }
+    .mobile-cta:hover {
+        background: #e0e0e0 !important;
+        color: #000 !important;
+    }
+</style>
+
+<script>
+    const toggle = document.getElementById("menu-toggle")!;
+    const overlay = document.getElementById("mobile-overlay")!;
+    const links = document.querySelectorAll(".mobile-link");
+
+    let isOpen = false;
+
+    function open() {
+        isOpen = true;
+        toggle.classList.add("is-open");
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+        toggle.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+    }
+
+    function close() {
+        isOpen = false;
+        toggle.classList.remove("is-open");
+        overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", "true");
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+    }
+
+    toggle.addEventListener("click", () => (isOpen ? close() : open()));
+    links.forEach((l) => l.addEventListener("click", close));
+    document.addEventListener("keydown", (e) => e.key === "Escape" && close());
+</script>

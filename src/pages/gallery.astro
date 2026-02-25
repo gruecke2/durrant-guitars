@@ -43,7 +43,8 @@ const sortedBuilds = builds.sort((a, b) => {
                                     data-pswp-width={img.width} 
                                     data-pswp-height={img.height} 
                                     target="_blank"
-                                    class="group relative aspect-[4/5] overflow-hidden rounded-sm bg-surface"
+                                    class="group relative aspect-[4/5] overflow-hidden rounded-sm bg-surface reveal"
+                                    style={`transition-delay: ${(i % 4) * 100}ms;`}
                                 >
                                     <span class="absolute inset-0 z-10 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-8 h-8">
