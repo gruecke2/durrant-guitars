@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import tomImage from "../assets/images/site/Tom Photos/Meet Tom Section.JPG";
+import { Picture } from "astro:assets";
+import tomImage from "../assets/images/site/Tom Photos/tom_portrait-guitar_01.jpg";
 ---
 
 <Layout
@@ -67,9 +67,12 @@ import tomImage from "../assets/images/site/Tom Photos/Meet Tom Section.JPG";
                     <div
                         class="relative bg-surface rounded-sm overflow-hidden aspect-[3/4]"
                     >
-                        <Image
+                        <Picture
                             src={tomImage}
                             alt="Tom Durrant in his workshop"
+                            widths={[400, 600, 800]}
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            formats={["avif", "webp"]}
                             class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105"
                         />
                     </div>

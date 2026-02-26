@@ -7,9 +7,9 @@
     "description": "A stunning Racketeer finished in a lightly aged Daphne Blue nitrocellulose lacquer. Features our custom hand-wound P90s for a fat, articulate midrange that cuts through any mix.",
     "stripePaymentLink": "https://buy.stripe.com/test_xxxxx1",
     "images": [
-        "../../assets/images/site/Catalog Photos/Racketeer/Copy of Guitar1-4.jpg",
-        "../../assets/images/site/Catalog Photos/Racketeer/Copy of Guitar1-5.jpg",
-        "../../assets/images/site/Catalog Photos/Racketeer/Copy of Guitar1-7.jpg"
+        "../../assets/images/site/Catalog Photos/Racketeer/racketeer_back-body_01.jpg",
+        "../../assets/images/site/Catalog Photos/Racketeer/racketeer_front-full_01.jpg",
+        "../../assets/images/site/Catalog Photos/Racketeer/racketeer_front-body-dark_01.jpg"
     ],
     "specs": {
         "body": "Alder",

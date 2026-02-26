@@ -6,7 +6,7 @@
 
   --color-primary: #f5f5f5;
   --color-primary-dark: #e0e0e0;
-  
+
   --color-background: #0a0a0a;
   --color-surface: #171717;
   --color-surface-light: #262626;
@@ -18,13 +18,19 @@
   html {
     @apply bg-background text-primary antialiased;
     font-size: 16px;
+    scrollbar-gutter: stable both-edges;
   }
-  
+
   body {
     @apply min-h-screen flex flex-col;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif tracking-tight text-white;
   }
 }
@@ -33,15 +39,15 @@
   .container {
     @apply max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   .btn {
     @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm transition-colors duration-200;
   }
-  
+
   .btn-primary {
     @apply bg-white text-black hover:bg-gray-200;
   }
-  
+
   .btn-outline {
     @apply border-white text-white hover:bg-white hover:text-black;
   }

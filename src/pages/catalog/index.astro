@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 
 const catalog = await getCollection("catalog");
 ---
@@ -31,9 +31,12 @@ const catalog = await getCollection("catalog");
                             class={`flex flex-col ${index % 2 !== 0 ? "md:flex-row-reverse" : "md:flex-row"} gap-12 items-center reveal delay-${((index % 3) + 1) * 100}`}
                         >
                             <div class="w-full md:w-1/2 aspect-square relative bg-surface-light group overflow-hidden rounded-sm">
-                                <Image
+                                <Picture
                                     src={model.data.images[0]}
                                     alt={model.data.name}
+                                    widths={[400, 600, 800]}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    formats={["avif", "webp"]}
                                     class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                                 />
                             </div>

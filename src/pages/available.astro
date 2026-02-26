@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 
 // Get both available and sold inventory, sort by availability
 const allInventory = await getCollection("available");
@@ -59,9 +59,12 @@ const sortedInventory = allInventory.sort((a, b) => {
                                             </span>
                                         </div>
                                     )}
-                                    <Image
+                                    <Picture
                                         src={item.data.images[0]}
                                         alt={item.data.name}
+                                        widths={[300, 400, 600]}
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                        formats={["avif", "webp"]}
                                         class={`w-full h-full object-cover transition-transform duration-700 ${item.data.status === "available" ? "hover:scale-105" : ""}`}
                                     />
                                 </div>

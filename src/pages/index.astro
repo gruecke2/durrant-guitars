@@ -1,9 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import heroImage from "../assets/images/site/Durrant Head Stock Photos/Live1-8.JPG";
-import secondaryImage from "../assets/images/site/Catalog Photos/Racketeer/Copy of Guitar1-4.jpg";
-import thirdImage from "../assets/images/site/Catalog Photos/Con Artist/Copy of Guitar2-8.jpg";
+import { Picture } from "astro:assets";
+import heroImage from "../assets/images/site/Durrant Head Stock Photos/headstock_closeup-front-dark_01.jpg";
+import secondaryImage from "../assets/images/site/Catalog Photos/Racketeer/racketeer_front-full_01.jpg";
+import thirdImage from "../assets/images/site/Catalog Photos/Con Artist/con-artist_closeup-fretboard_01.jpg";
 
 // Note: ensure we import some beautiful typography and colors
 const title = "Durrant Guitars";
@@ -18,9 +18,12 @@ const title = "Durrant Guitars";
             class="absolute inset-0 z-0 bg-black flex justify-center overflow-hidden"
         >
             <div class="relative w-full h-full max-w-[1545px]">
-                <Image
+                <Picture
                     src={heroImage}
                     alt="Custom Durrant Guitar"
+                    widths={[800, 1200, 1600]}
+                    sizes="100vw"
+                    formats={["avif", "webp"]}
                     class="w-full h-full object-cover opacity-50 scale-105 transform hover:scale-100 transition-transform duration-[10s]"
                     style="object-position: center 35%;"
                     loading="eager"
@@ -140,9 +143,12 @@ const title = "Durrant Guitars";
                     href="/catalog/grifter"
                     class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-surface-light reveal delay-100"
                 >
-                    <Image
+                    <Picture
                         src={heroImage}
                         alt="The Grifter"
+                        widths={[400, 600, 800]}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        formats={["avif", "webp"]}
                         class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
                     />
                     <div
@@ -171,9 +177,12 @@ const title = "Durrant Guitars";
                     href="/catalog/racketeer"
                     class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-surface-light reveal delay-200"
                 >
-                    <Image
+                    <Picture
                         src={secondaryImage}
                         alt="The Racketeer"
+                        widths={[400, 600, 800]}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        formats={["avif", "webp"]}
                         class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
                     />
                     <div
