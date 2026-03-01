@@ -44,8 +44,9 @@ const { model } = Astro.props;
                         </p>
                     </div>
                     <div
-                        class="mt-6 md:mt-0 flex flex-col items-center md:items-end p-6 bg-surface rounded-sm border border-white/5"
+                        class="mt-6 md:mt-0 flex flex-col items-center md:items-end p-6 bg-surface rounded-sm border border-white/5 relative overflow-hidden"
                     >
+                        <div class="absolute top-0 left-0 w-full h-[2px] bg-accent"></div>
                         <span
                             class="text-xs uppercase tracking-widest text-gray-400 mb-2"
                             >Base Build Starting At</span
@@ -55,7 +56,7 @@ const { model } = Astro.props;
                         >
                         <a
                             href={`/create-yours?model=${model.data.slug}`}
-                            class="btn btn-primary text-xs uppercase tracking-widest"
+                            class="btn btn-accent text-xs uppercase tracking-widest"
                         >
                             Start Your Build
                         </a>
@@ -64,23 +65,67 @@ const { model } = Astro.props;
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                <!-- Images Column -->
-                <div class="lg:col-span-7 space-y-6">
-                    {
-                        model.data.images.map((img, index) => (
-                            <div class="bg-surface-light rounded-sm overflow-hidden aspect-[4/3]">
-                                <Picture
-                                    src={img}
-                                    alt={`${model.data.name} image ${index + 1}`}
-                                    widths={[600, 900, 1200]}
-                                    sizes="(max-width: 1024px) 100vw, 58vw"
-                                    formats={["avif", "webp"]}
-                                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                                    loading={index === 0 ? "eager" : "lazy"}
-                                />
+                <!-- Carousel Column -->
+                <div class="lg:col-span-7">
+                    <div class="carousel" id="guitar-carousel" data-image-count={model.data.images.length}>
+                        <!-- Main Image Display -->
+                        <div class="carousel__viewport">
+                            <div class="carousel__track" id="carousel-track">
+                                {
+                                    model.data.images.map((img, index) => (
+                                        <div class={`carousel__slide ${index === 0 ? 'is-active' : ''}`} data-index={index}>
+                                            <Picture
+                                                src={img}
+                                                alt={`${model.data.name} — view ${index + 1}`}
+                                                widths={[600, 900, 1200]}
+                                                sizes="(max-width: 1024px) 100vw, 58vw"
+                                                formats={["avif", "webp"]}
+                                                class="carousel__img"
+                                                loading={index === 0 ? "eager" : "lazy"}
+                                            />
+                                        </div>
+                                    ))
+                                }
                             </div>
-                        ))
-                    }
+
+                            <!-- Navigation Arrows -->
+                            {model.data.images.length > 1 && (
+                                <button class="carousel__nav carousel__nav--prev" id="carousel-prev" aria-label="Previous image">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                    </svg>
+                                </button>
+                                <button class="carousel__nav carousel__nav--next" id="carousel-next" aria-label="Next image">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
+
+                        <!-- Thumbnail Strip -->
+                        {model.data.images.length > 1 && (
+                            <div class="carousel__thumbs" id="carousel-thumbs">
+                                {model.data.images.map((img, index) => (
+                                    <button
+                                        class={`carousel__thumb ${index === 0 ? 'is-active' : ''}`}
+                                        data-thumb-index={index}
+                                        aria-label={`View image ${index + 1}`}
+                                    >
+                                        <Picture
+                                            src={img}
+                                            alt={`${model.data.name} thumbnail ${index + 1}`}
+                                            widths={[100, 150]}
+                                            sizes="80px"
+                                            formats={["avif", "webp"]}
+                                            class="carousel__thumb-img"
+                                            loading="lazy"
+                                        />
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 <!-- Info Column -->
@@ -126,3 +171,216 @@ const { model } = Astro.props;
         </div>
     </div>
 </Layout>
+
+<style>
+    /* ── Carousel ─────────────────────────────────────────── */
+    .carousel {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .carousel__viewport {
+        position: relative;
+        width: 100%;
+        /* Tall enough to show full guitar photos without cropping */
+        aspect-ratio: 3 / 4;
+        background: #131313;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .carousel__track {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .carousel__slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        transform: scale(1.02);
+        pointer-events: none;
+    }
+
+    .carousel__slide.is-active {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: all;
+    }
+
+    .carousel__img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        /* contain so we never crop the guitar */
+        padding: 1rem;
+    }
+
+    /* ── Navigation Arrows ────────────────────────────────── */
+    .carousel__nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        padding: 0.75rem;
+        border-radius: 50%;
+        transition: all 0.25s ease;
+        backdrop-filter: blur(8px);
+    }
+
+    .carousel__nav:hover {
+        background: rgba(178, 4, 4, 0.6);
+        color: white;
+        border-color: rgba(178, 4, 4, 0.4);
+    }
+
+    .carousel__nav--prev {
+        left: 0.75rem;
+    }
+
+    .carousel__nav--next {
+        right: 0.75rem;
+    }
+
+    /* ── Thumbnails ───────────────────────────────────────── */
+    .carousel__thumbs {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        padding-bottom: 0.25rem;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    }
+
+    .carousel__thumbs::-webkit-scrollbar {
+        height: 4px;
+    }
+    .carousel__thumbs::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .carousel__thumbs::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 2px;
+    }
+
+    .carousel__thumb {
+        flex: 0 0 auto;
+        width: 72px;
+        height: 72px;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 2px solid transparent;
+        cursor: pointer;
+        background: #1a1a1a;
+        transition: border-color 0.2s ease, opacity 0.2s ease;
+        opacity: 0.5;
+        padding: 0;
+    }
+
+    .carousel__thumb:hover {
+        opacity: 0.8;
+    }
+
+    .carousel__thumb.is-active {
+        border-color: #b20404;
+        opacity: 1;
+    }
+
+    .carousel__thumb-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* ── Image counter pill ───────────────────────────────── */
+    .carousel__counter {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.6);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        padding: 0.35rem 0.75rem;
+        border-radius: 100px;
+        font-variant-numeric: tabular-nums;
+        backdrop-filter: blur(4px);
+    }
+</style>
+
+<script>
+    const carousel = document.getElementById('guitar-carousel');
+    if (carousel) {
+        const slides = carousel.querySelectorAll<HTMLElement>('.carousel__slide');
+        const thumbs = carousel.querySelectorAll<HTMLElement>('.carousel__thumb');
+        const prevBtn = document.getElementById('carousel-prev');
+        const nextBtn = document.getElementById('carousel-next');
+        const total = slides.length;
+        let current = 0;
+
+        function goTo(index: number) {
+            // Wrap around
+            if (index < 0) index = total - 1;
+            if (index >= total) index = 0;
+
+            // Update slides
+            slides.forEach((s, i) => {
+                s.classList.toggle('is-active', i === index);
+            });
+
+            // Update thumbnails
+            thumbs.forEach((t, i) => {
+                t.classList.toggle('is-active', i === index);
+                if (i === index) {
+                    t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            });
+
+            current = index;
+        }
+
+        // Arrow navigation
+        prevBtn?.addEventListener('click', () => goTo(current - 1));
+        nextBtn?.addEventListener('click', () => goTo(current + 1));
+
+        // Thumbnail clicks
+        thumbs.forEach((thumb) => {
+            thumb.addEventListener('click', () => {
+                const idx = parseInt(thumb.dataset.thumbIndex || '0', 10);
+                goTo(idx);
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') goTo(current + 1);
+            if (e.key === 'ArrowLeft') goTo(current - 1);
+        });
+
+        // Swipe support on mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const viewport = carousel.querySelector('.carousel__viewport');
+
+        viewport?.addEventListener('touchstart', (e) => {
+            touchStartX = (e as TouchEvent).changedTouches[0].screenX;
+        }, { passive: true });
+
+        viewport?.addEventListener('touchend', (e) => {
+            touchEndX = (e as TouchEvent).changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) goTo(current + 1);
+                else goTo(current - 1);
+            }
+        }, { passive: true });
+    }
+</script>

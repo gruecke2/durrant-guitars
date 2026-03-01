@@ -30,7 +30,7 @@ const title = "Durrant Guitars";
                 />
             </div>
             <div
-                class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"
+                class="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"
             >
             </div>
             <div
@@ -96,7 +96,9 @@ const title = "Durrant Guitars";
             <h2 class="font-serif text-3xl md:text-5xl text-white mb-8 reveal">
                 Not Just Another Guitar.
             </h2>
-            <div class="w-16 h-[1px] bg-white/30 mx-auto mb-8 reveal delay-100">
+            <div
+                class="w-16 h-[1px] bg-accent/50 mx-auto mb-8 reveal delay-100"
+            >
             </div>
             <p
                 class="text-gray-400 text-lg md:text-xl leading-relaxed font-light reveal delay-200"
@@ -157,7 +159,7 @@ const title = "Durrant Guitars";
                     </div>
                     <div class="absolute bottom-0 left-0 p-8 w-full">
                         <span
-                            class="text-xs tracking-[0.2em] uppercase text-gray-400 mb-2 block border-l-2 border-white pl-3"
+                            class="text-xs tracking-[0.2em] uppercase text-gray-400 mb-2 block border-l-2 border-accent pl-3"
                             >The Tele Style</span
                         >
                         <h3 class="font-serif text-3xl text-white mb-3">
@@ -191,7 +193,7 @@ const title = "Durrant Guitars";
                     </div>
                     <div class="absolute bottom-0 left-0 p-8 w-full">
                         <span
-                            class="text-xs tracking-[0.2em] uppercase text-gray-400 mb-2 block border-l-2 border-white pl-3"
+                            class="text-xs tracking-[0.2em] uppercase text-gray-400 mb-2 block border-l-2 border-accent pl-3"
                             >The Offset</span
                         >
                         <h3 class="font-serif text-3xl text-white mb-3">
@@ -215,12 +217,38 @@ const title = "Durrant Guitars";
         >
         </div>
         <div class="absolute inset-0 z-0">
+            <!-- Deep accent radial glow from center -->
             <div
-                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/40"
+                class="absolute inset-0"
+                style="background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(178, 4, 4, 0.18), transparent 70%);"
+            >
+            </div>
+            <!-- Warm ambient wash at the bottom -->
+            <div
+                class="absolute inset-0"
+                style="background: radial-gradient(ellipse 120% 50% at 50% 110%, rgba(140, 20, 10, 0.2), transparent 60%);"
+            >
+            </div>
+            <!-- Very subtle warm highlight behind center content -->
+            <div
+                class="absolute inset-0"
+                style="background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.02) 0%, transparent 40%);"
+            >
+            </div>
+            <!-- Side vignette for a cinematic feel -->
+            <div
+                class="absolute inset-0"
+                style="background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 20%, rgba(10, 10, 10, 0.75) 100%);"
             >
             </div>
         </div>
         <div class="relative z-10 container mx-auto px-4 text-center">
+            <!-- Accent line divider -->
+            <div
+                class="w-12 h-[2px] mx-auto mb-10 reveal"
+                style="background: linear-gradient(90deg, transparent, #b20404, transparent);"
+            >
+            </div>
             <h2 class="font-serif text-4xl md:text-5xl text-white mb-6 reveal">
                 Ready to Ship.
             </h2>

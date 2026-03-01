@@ -13,8 +13,11 @@
         "bridge": "Tune-O-Matic"
     },
     "images": [
+        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_front-full_01.jpg",
         "../../assets/images/site/Catalog Photos/Con Artist/con-artist_closeup-bridge_01.jpg",
+        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_closeup-headstock_01.jpg",
         "../../assets/images/site/Catalog Photos/Con Artist/con-artist_closeup-fretboard_01.jpg",
-        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_back-full_01.jpg"
+        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_back-full_01.jpg",
+        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_lifestyle-outdoor_01.jpg"
     ]
 }

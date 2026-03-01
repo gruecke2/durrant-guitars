@@ -7,6 +7,9 @@
   --color-primary: #f5f5f5;
   --color-primary-dark: #e0e0e0;
 
+  --color-accent: #b20404;
+  --color-accent-light: #d41515;
+
   --color-background: #0a0a0a;
   --color-surface: #171717;
   --color-surface-light: #262626;
@@ -18,7 +21,7 @@
   html {
     @apply bg-background text-primary antialiased;
     font-size: 16px;
-    scrollbar-gutter: stable both-edges;
+    scrollbar-gutter: stable;
   }
 
   body {
@@ -50,5 +53,9 @@
 
   .btn-outline {
     @apply border-white text-white hover:bg-white hover:text-black;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-white hover:bg-accent-light;
   }
 }

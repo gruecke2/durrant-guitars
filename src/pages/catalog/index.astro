@@ -20,29 +20,32 @@ const catalog = await getCollection("catalog");
             <p
                 class="text-gray-400 text-center max-w-2xl mx-auto text-lg mb-20 font-light"
             >
-                Our foundation. Every Durrant begins as one of these classic
-                silhouettes, tailored to your distinct playing style.
+                Every swindle starts with a silhouette. Pick your weapon.
             </p>
 
-            <div class="space-y-24">
+            <div class="space-y-28">
                 {
                     catalog.map((model, index) => (
                         <div
-                            class={`flex flex-col ${index % 2 !== 0 ? "md:flex-row-reverse" : "md:flex-row"} gap-12 items-center reveal delay-${((index % 3) + 1) * 100}`}
+                            class={`model-row flex flex-col ${index % 2 !== 0 ? "md:flex-row-reverse" : "md:flex-row"} gap-12 items-center reveal delay-${((index % 3) + 1) * 100}`}
                         >
-                            <div class="w-full md:w-1/2 aspect-square relative bg-surface-light group overflow-hidden rounded-sm">
-                                <Picture
-                                    src={model.data.images[0]}
-                                    alt={model.data.name}
-                                    widths={[400, 600, 800]}
-                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                    formats={["avif", "webp"]}
-                                    class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                                />
-                            </div>
+                            <a href={`/catalog/${model.data.slug}`} class="model-image-link w-full md:w-1/2 relative group">
+                                <div class="aspect-[3/4] relative bg-[#131313] overflow-hidden rounded-sm">
+                                    <Picture
+                                        src={model.data.images[0]}
+                                        alt={model.data.name}
+                                        widths={[400, 600, 800]}
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        formats={["avif", "webp"]}
+                                        class="absolute inset-0 w-full h-full object-contain p-4 opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-700"
+                                    />
+                                </div>
+                                <!-- Red accent line on hover -->
+                                <div class="absolute bottom-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-500 ease-out"></div>
+                            </a>
                             <div class="w-full md:w-1/2 space-y-6">
                                 <div class="flex items-center gap-4 mb-2">
-                                    <span class="bg-surface px-3 py-1 text-xs uppercase tracking-widest text-gray-300 font-semibold">
+                                    <span class="model-badge bg-surface px-3 py-1 text-xs uppercase tracking-widest text-gray-300 font-semibold border-l-2 border-accent">
                                         {model.data.style}
                                     </span>
                                     <span class="text-xs uppercase tracking-[0.2em] text-gray-500 border-l border-white/20 pl-4">
@@ -68,7 +71,7 @@ const catalog = await getCollection("catalog");
                                     </div>
                                     <a
                                         href={`/catalog/${model.data.slug}`}
-                                        class="btn btn-outline text-xs tracking-widest uppercase py-2 px-6"
+                                        class="btn btn-outline text-xs tracking-widest uppercase py-2 px-6 hover:bg-accent hover:text-white hover:border-accent transition-all duration-300"
                                     >
                                         View Specs
                                     </a>
@@ -81,3 +84,14 @@ const catalog = await getCollection("catalog");
         </div>
     </div>
 </Layout>
+
+<style>
+    .model-row {
+        position: relative;
+    }
+
+    .model-image-link {
+        display: block;
+        text-decoration: none;
+    }
+</style>
