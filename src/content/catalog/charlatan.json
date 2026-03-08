@@ -1,23 +1,23 @@
 {
-    "name": "Charlatan",
-    "slug": "charlatan",
-    "style": "Double Cut",
-    "tagline": "Sleek and aggressive.",
-    "description": "An SG-inspired double cutaway. Lightweight, fast, and aggressive. The Charlatan is the ultimate rock machine with unparalleled upper fret access.",
-    "startingPrice": 1900,
-    "specs": {
-        "body": "Mahogany",
-        "neck": "Mahogany, Slim Taper",
-        "fretboard": "Rosewood",
-        "pickups": "High-output Humbuckers or P90s",
-        "bridge": "Tune-O-Matic or Wraparound"
-    },
-    "images": [
-        "../../assets/images/site/Past Build Photos/charlatan_front-body_01.jpg",
-        "../../assets/images/site/Past Build Photos/charlatan_closeup-bridge_01.jpg",
-        "../../assets/images/site/Past Build Photos/charlatan_closeup-pickups_01.jpg",
-        "../../assets/images/site/Past Build Photos/charlatan_front-carve_01.jpg",
-        "../../assets/images/site/Past Build Photos/charlatan_closeup-body_01.jpg",
-        "../../assets/images/site/Past Build Photos/charlatan_back-neckjoint_01.jpg"
-    ]
+  "name": "Charlatan",
+  "slug": "charlatan",
+  "style": "Double Cut",
+  "tagline": "Sleek and aggressive.",
+  "description": "An SG-inspired double cutaway. Lightweight, fast, and aggressive. The Charlatan is the ultimate rock machine with unparalleled upper fret access.",
+  "startingPrice": 1900,
+  "specs": {
+    "body": "Mahogany",
+    "neck": "Mahogany, Slim Taper",
+    "fretboard": "Rosewood",
+    "pickups": "High-output Humbuckers or P90s",
+    "bridge": "Tune-O-Matic or Wraparound"
+  },
+  "images": [
+    "../../assets/images/site/catalog/charlatan/charlatan_front-body_01.jpg",
+    "../../assets/images/site/catalog/charlatan/charlatan_front-angled_01.jpg",
+    "../../assets/images/site/catalog/charlatan/charlatan_closeup-pickups_01.jpg",
+    "../../assets/images/site/catalog/charlatan/charlatan_front-carve_01.jpg",
+    "../../assets/images/site/catalog/charlatan/charlatan_closeup-body_back_01.jpg",
+    "../../assets/images/site/catalog/charlatan/charlatan_closeup-pickups_02.jpg"
+  ]
 }

@@ -1,22 +1,22 @@
 {
-    "name": "Con Artist #045 — Gold Top",
-    "slug": "con-artist-045",
-    "model": "con-artist",
-    "price": 2850,
-    "status": "sold",
-    "description": "Classic Gold Top aesthetics over a resonant mahogany body and carved maple cap. Outfitted with our vintage-spec humbuckers for the ultimate in sustain and warmth.",
-    "stripePaymentLink": "https://buy.stripe.com/test_xxxxx2",
-    "images": [
-        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_closeup-fretboard_01.jpg",
-        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_back-full_01.jpg"
-    ],
-    "specs": {
-        "body": "Mahogany / Maple Top",
-        "finish": "Gold Top Nitrocellulose",
-        "neck": "Mahogany, 50s Profile",
-        "fretboard": "Bound Rosewood, 12\" Radius",
-        "pickups": "Durrant Vintage PAF Humbuckers",
-        "bridge": "Tune-O-Matic",
-        "weight": "8.5 lbs"
-    }
+  "name": "Con Artist #045 — Gold Top",
+  "slug": "con-artist-045",
+  "model": "con-artist",
+  "price": 2850,
+  "status": "sold",
+  "description": "Classic Gold Top aesthetics over a resonant mahogany body and carved maple cap. Outfitted with our vintage-spec humbuckers for the ultimate in sustain and warmth.",
+  "stripePaymentLink": "https://buy.stripe.com/test_xxxxx2",
+  "images": [
+    "../../assets/images/site/available/con-artist-045/con-artist_closeup-fretboard_01.jpg",
+    "../../assets/images/site/available/con-artist-045/con-artist_back-full_01.jpg"
+  ],
+  "specs": {
+    "body": "Mahogany / Maple Top",
+    "finish": "Gold Top Nitrocellulose",
+    "neck": "Mahogany, 50s Profile",
+    "fretboard": "Bound Rosewood, 12\" Radius",
+    "pickups": "Durrant Vintage PAF Humbuckers",
+    "bridge": "Tune-O-Matic",
+    "weight": "8.5 lbs"
+  }
 }

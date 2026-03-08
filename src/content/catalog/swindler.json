@@ -1,21 +1,21 @@
 {
-    "name": "Swindler",
-    "slug": "swindler",
-    "style": "S-Style",
-    "tagline": "The versatile classic.",
-    "description": "Our take on the timeless Stratocaster shape. Three pickups, five positions, and infinite possibilities. The Swindler ranges from bell-like cleans to biting leads.",
-    "startingPrice": 1850,
-    "specs": {
-        "body": "Alder or Swamp Ash",
-        "neck": "Maple, Modern C",
-        "fretboard": "Maple or Rosewood",
-        "pickups": "S-S-S or H-S-S Custom Wound",
-        "bridge": "Vintage Synchronized Tremolo"
-    },
-    "images": [
-        "../../assets/images/site/Past Build Photos/swindler_front-angled_01.jpg",
-        "../../assets/images/site/Past Build Photos/swindler_closeup-body_01.jpg",
-        "../../assets/images/site/Past Build Photos/swindler_closeup-bridge_01.jpg",
-        "../../assets/images/site/Past Build Photos/swindler_closeup-necks_01.jpg"
-    ]
+  "name": "Swindler",
+  "slug": "swindler",
+  "style": "Double Neck",
+  "tagline": "Double Trouble.",
+  "description": "12-String and 6-String all in one guitar. Channel your inner Jimmy Page.",
+  "startingPrice": 1850,
+  "specs": {
+    "body": "Alder or Swamp Ash",
+    "neck": "Maple, Modern C",
+    "fretboard": "Maple or Rosewood",
+    "pickups": "H-H",
+    "bridge": "Hardtail"
+  },
+  "images": [
+    "../../assets/images/site/catalog/swindler/swindler_front-angled_01.jpg",
+    "../../assets/images/site/catalog/swindler/swindler_closeup-body_01.jpg",
+    "../../assets/images/site/catalog/swindler/swindler_closeup-bridge_01.jpg",
+    "../../assets/images/site/catalog/swindler/swindler_closeup-necks_01.jpg"
+  ]
 }

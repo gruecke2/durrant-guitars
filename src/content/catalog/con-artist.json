@@ -1,23 +1,23 @@
 {
-    "name": "Con Artist",
-    "slug": "con-artist",
-    "style": "Single Cut",
-    "tagline": "Classic humbucker power.",
-    "description": "A Les Paul-inspired single cutaway. The Con Artist is built for sustain and thick, creamy overtones. Carved maple top over a mahogany back provides the perfect balance of bite and warmth.",
-    "startingPrice": 2200,
-    "specs": {
-        "body": "Mahogany with Maple Cap",
-        "neck": "Mahogany, 50s Fat or 60s Slim",
-        "fretboard": "Rosewood or Ebony",
-        "pickups": "Vintage PAF style humbuckers",
-        "bridge": "Tune-O-Matic"
-    },
-    "images": [
-        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_front-full_01.jpg",
-        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_closeup-bridge_01.jpg",
-        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_closeup-headstock_01.jpg",
-        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_closeup-fretboard_01.jpg",
-        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_back-full_01.jpg",
-        "../../assets/images/site/Catalog Photos/Con Artist/con-artist_lifestyle-outdoor_01.jpg"
-    ]
+  "name": "Con Artist",
+  "slug": "con-artist",
+  "style": "Single Cut",
+  "tagline": "Classic humbucker power.",
+  "description": "A Les Paul-inspired single cutaway. The Con Artist is built for sustain and thick, creamy overtones. Carved maple top over a mahogany back provides the perfect balance of bite and warmth.",
+  "startingPrice": 2200,
+  "specs": {
+    "body": "Mahogany with Maple Cap",
+    "neck": "Mahogany, 50s Fat or 60s Slim",
+    "fretboard": "Rosewood or Ebony",
+    "pickups": "Vintage PAF style humbuckers",
+    "bridge": "Tune-O-Matic"
+  },
+  "images": [
+    "../../assets/images/site/catalog/con-artist/con-artist_front-full_01.jpg",
+    "../../assets/images/site/catalog/con-artist/con-artist_closeup-body_01.jpg",
+    "../../assets/images/site/catalog/con-artist/con-artist_closeup-body-angle_01.jpg",
+    "../../assets/images/site/catalog/con-artist/con-artist_closeup-fretboard_01.jpg",
+    "../../assets/images/site/catalog/con-artist/con-artist_dark-purple-bg_01.jpg",
+    "../../assets/images/site/catalog/con-artist/con-artist_lifestyle-outdoor_01.jpg"
+  ]
 }

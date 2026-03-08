@@ -1,11 +1,10 @@
 {
-    "title": "Custom Offset — Masterbuild",
-    "model": "Custom",
-    "description": "A completely custom design featuring an open-pore natural ash body, roasted maple neck, and custom electronics.",
-    "images": [
-        "../../assets/images/site/Past Build Photos/bass_closeup-controls_01.jpg",
-        "../../assets/images/site/Past Build Photos/bass_closeup-pickguard_01.jpg",
-        "../../assets/images/site/Past Build Photos/bass_closeup-headstock_01.jpg"
-    ],
-    "date": "2024-12-05"
+  "title": "Custom Bass — Red Pearloid",
+  "model": "Custom",
+  "description": "A completely custom bass design featuring a black body with red pearloid pickguard and gold hardware.",
+  "images": [
+    "../../assets/images/site/gallery/build-003/bass_front-full_01.jpg",
+    "../../assets/images/site/gallery/build-003/bass_closeup-body_01.jpg"
+  ],
+  "date": "2024-12-05"
 }

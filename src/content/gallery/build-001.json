@@ -1,11 +1,11 @@
 {
-    "title": "The Swindler — Seafoam Green Over Burst",
-    "model": "Swindler",
-    "description": "A heavily relic'd Seafoam Green over 3-Tone Sunburst finish. Custom S-S-S pickup configuration with a 10-way switch.",
-    "images": [
-        "../../assets/images/site/Past Build Photos/swindler_closeup-necks_01.jpg",
-        "../../assets/images/site/Past Build Photos/swindler_front-angled_01.jpg",
-        "../../assets/images/site/Past Build Photos/swindler_closeup-body_01.jpg"
-    ],
-    "date": "2024-10-15"
+  "title": "The Swindler — Seafoam Green Over Burst",
+  "model": "Swindler",
+  "description": "A heavily relic'd Seafoam Green over 3-Tone Sunburst finish. Custom S-S-S pickup configuration with a 10-way switch.",
+  "images": [
+    "../../assets/images/site/gallery/build-001/swindler_closeup-necks_01.jpg",
+    "../../assets/images/site/gallery/build-001/swindler_front-angled_01.jpg",
+    "../../assets/images/site/gallery/build-001/swindler_closeup-body_01.jpg"
+  ],
+  "date": "2024-10-15"
 }

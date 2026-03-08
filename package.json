@@ -12,10 +12,17 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
+    "@astrojs/markdoc": "^0.15.10",
+    "@astrojs/node": "^9.5.4",
+    "@astrojs/react": "^4.4.2",
     "@astrojs/svelte": "^7.2.5",
+    "@keystatic/astro": "^5.0.6",
+    "@keystatic/core": "^0.5.48",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.17.1",
     "photoswipe": "^5.4.4",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "svelte": "^5.53.3",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"

@@ -13,10 +13,9 @@
     "bridge": "3-saddle brass or 6-saddle steel"
   },
   "images": [
-    "../../assets/images/site/Catalog Photos/Grifter/grifter_front-full_01.jpg",
-    "../../assets/images/site/Catalog Photos/Grifter/grifter_closeup-bridge_01.jpg",
-    "../../assets/images/site/Catalog Photos/Grifter/grifter_back-full_01.jpg",
-    "../../assets/images/site/Catalog Photos/Grifter/grifter_back-neckjoint_01.jpg",
-    "../../assets/images/site/Catalog Photos/Grifter/grifter_back-body_01.jpg"
+    "../../assets/images/site/catalog/grifter/grifter_front-full_01.jpg",
+    "../../assets/images/site/catalog/grifter/grifter_closeup-bridge_01.jpg",
+    "../../assets/images/site/catalog/grifter/grifter_front-neckjoint_01.jpg",
+    "../../assets/images/site/catalog/grifter/grifter_back-body_01.jpg"
   ]
 }

@@ -1,12 +1,12 @@
 {
-    "title": "The Charlatan — Pelham Blue",
-    "model": "Charlatan",
-    "description": "Pelham blue double cut with P90s and a wraparound bridge. Pure rock and roll machine.",
-    "images": [
-        "../../assets/images/site/Past Build Photos/charlatan_closeup-bridge_01.jpg",
-        "../../assets/images/site/Past Build Photos/charlatan_closeup-pickups_01.jpg",
-        "../../assets/images/site/Past Build Photos/charlatan_closeup-body_01.jpg",
-        "../../assets/images/site/Past Build Photos/charlatan_front-body_01.jpg"
-    ],
-    "date": "2024-11-20"
+  "title": "The Charlatan — Pelham Blue",
+  "model": "Charlatan",
+  "description": "Pelham blue double cut with P90s and a wraparound bridge. Pure rock and roll machine.",
+  "images": [
+    "../../assets/images/site/gallery/build-002/charlatan_front-angled_01.jpg",
+    "../../assets/images/site/gallery/build-002/charlatan_closeup-pickups_01.jpg",
+    "../../assets/images/site/gallery/build-002/charlatan_closeup-body_back_01.jpg",
+    "../../assets/images/site/gallery/build-002/charlatan_front-body_01.jpg"
+  ],
+  "date": "2024-11-20"
 }

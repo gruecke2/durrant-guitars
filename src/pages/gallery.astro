@@ -10,9 +10,32 @@ const builds = await getCollection('gallery');
 const sortedBuilds = builds.sort((a, b) => {
     return new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime();
 });
+
+// ── Workshop photos (masonry tiles) ─ managed via Keystatic ──
+const workshopImages = import.meta.glob<{ default: ImageMetadata }>(
+    '../assets/images/site/workshop/*.{jpg,jpeg,png}',
+    { eager: true }
+);
+
+interface MasonryTile {
+    image: ImageMetadata;
+    alt: string;
+    label: string;
+}
+
+const masonryTiles: MasonryTile[] = Object.entries(workshopImages).map(([path, mod]) => {
+    const filename = path.split('/').pop()?.replace(/\.(jpg|jpeg|png)$/, '') || '';
+    const label = filename
+        .replace('build_', '')
+        .replace(/_/g, ' ')
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, c => c.toUpperCase())
+        .replace(/ 0\d$/, '');
+    return { image: mod.default, alt: `Past build: ${label}`, label };
+});
 ---
 
-<Layout title="Gallery | Durrant Guitars" description="View our portfolio of custom handcrafted guitars.">
+<Layout title="Gallery | Durrant Guitars" description="View our portfolio of custom handcrafted guitars — featured builds and the workshop archive.">
     <div class="bg-background pt-32 pb-24">
         <div class="container mx-auto px-4 max-w-7xl">
             <h1 class="font-serif text-5xl md:text-6xl text-white mb-6 text-center">The Gallery</h1>
@@ -20,6 +43,7 @@ const sortedBuilds = builds.sort((a, b) => {
                 A selection of recent builds, custom combinations, and unique creations from the workshop.
             </p>
 
+            <!-- ═══ FEATURED BUILDS ═══════════════════════════════ -->
             <div class="space-y-28">
                 {sortedBuilds.map((build, index) => (
                     <section class="reveal">
@@ -69,6 +93,51 @@ const sortedBuilds = builds.sort((a, b) => {
                     </section>
                 ))}
             </div>
+
+            <!-- ═══ MASONRY — FROM THE WORKSHOP ═══════════════════ -->
+            {masonryTiles.length > 0 && (
+                <section class="mt-36 reveal">
+                    <div class="mb-12 text-center">
+                        <span class="text-xs tracking-[0.2em] uppercase text-gray-500 mb-3 block">The Archive</span>
+                        <h2 class="font-serif text-4xl md:text-5xl text-white mb-4">From the Workshop</h2>
+                        <div class="w-16 h-[1px] bg-accent/50 mx-auto mb-6"></div>
+                        <p class="text-gray-400 max-w-2xl mx-auto font-light text-lg">
+                            Not every build gets a full feature. Here's a look at the one-offs, experiments, and happy accidents.
+                        </p>
+                    </div>
+
+                    <div class="masonry-grid">
+                        {masonryTiles.map((tile, i) => (
+                            <button
+                                class="masonry-tile group"
+                                data-gallery-index="masonry"
+                                data-image-index={i}
+                                data-full-src={tile.image.src}
+                                data-full-width={tile.image.width}
+                                data-full-height={tile.image.height}
+                                type="button"
+                                aria-label={`View ${tile.alt}`}
+                            >
+                                <Picture
+                                    src={tile.image}
+                                    alt={tile.alt}
+                                    widths={[300, 500]}
+                                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                    formats={['avif', 'webp']}
+                                    class="masonry-tile__img"
+                                    loading="lazy"
+                                />
+                                <div class="masonry-tile__overlay">
+                                    <span class="masonry-tile__label">{tile.label}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 masonry-tile__icon">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9m11.25-5.25v4.5m0-4.5h-4.5m4.5 0L15 9m-11.25 11.25v-4.5m0 4.5h4.5m-4.5 0L9 15m11.25 5.25v-4.5m0 4.5h-4.5m4.5 0L15 15" />
+                                    </svg>
+                                </div>
+                            </button>
+                        ))}
+                    </div>
+                </section>
+            )}
             
             <div class="mt-32 text-center p-12 border border-white/5 bg-surface rounded-sm reveal">
                 <h3 class="font-serif text-3xl text-white mb-4">Inspired?</h3>
@@ -199,6 +268,147 @@ const sortedBuilds = builds.sort((a, b) => {
         opacity: 1;
     }
 
+    /* ── Masonry Grid ───────────────────────────────────── */
+    .masonry-grid {
+        columns: 2;
+        column-gap: 0.75rem;
+    }
+
+    @media (min-width: 640px) {
+        .masonry-grid {
+            columns: 3;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .masonry-grid {
+            columns: 4;
+            column-gap: 1rem;
+        }
+    }
+
+    .masonry-tile {
+        position: relative;
+        display: block;
+        width: 100%;
+        break-inside: avoid;
+        margin-bottom: 0.75rem;
+        overflow: hidden;
+        border-radius: 6px;
+        cursor: pointer;
+        border: none;
+        padding: 0;
+        background: #171717;
+        transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                    box-shadow 0.4s ease;
+    }
+
+    @media (min-width: 1024px) {
+        .masonry-tile {
+            margin-bottom: 1rem;
+        }
+    }
+
+    .masonry-tile:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
+                    0 0 0 1px rgba(178, 4, 4, 0.15);
+    }
+
+    .masonry-tile__img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                    filter 0.6s ease;
+    }
+
+    .masonry-tile:hover .masonry-tile__img {
+        transform: scale(1.06);
+    }
+
+    .masonry-tile__overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.75) 0%,
+            rgba(0, 0, 0, 0.15) 40%,
+            rgba(0, 0, 0, 0) 100%
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        padding: 1rem;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+    }
+
+    .masonry-tile:hover .masonry-tile__overlay {
+        opacity: 1;
+    }
+
+    .masonry-tile__label {
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        line-height: 1.3;
+        transform: translateY(8px);
+        transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .masonry-tile:hover .masonry-tile__label {
+        transform: translateY(0);
+    }
+
+    .masonry-tile__icon {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        color: rgba(255, 255, 255, 0.8);
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .masonry-tile:hover .masonry-tile__icon {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Stagger reveal for masonry tiles */
+    .masonry-tile {
+        opacity: 0;
+        transform: translateY(24px);
+        animation: masonry-reveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    @keyframes masonry-reveal {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Stagger each tile */
+    .masonry-tile:nth-child(1)  { animation-delay: 0.05s; }
+    .masonry-tile:nth-child(2)  { animation-delay: 0.10s; }
+    .masonry-tile:nth-child(3)  { animation-delay: 0.15s; }
+    .masonry-tile:nth-child(4)  { animation-delay: 0.20s; }
+    .masonry-tile:nth-child(5)  { animation-delay: 0.25s; }
+    .masonry-tile:nth-child(6)  { animation-delay: 0.30s; }
+    .masonry-tile:nth-child(7)  { animation-delay: 0.35s; }
+    .masonry-tile:nth-child(8)  { animation-delay: 0.40s; }
+    .masonry-tile:nth-child(9)  { animation-delay: 0.45s; }
+    .masonry-tile:nth-child(10) { animation-delay: 0.50s; }
+    .masonry-tile:nth-child(11) { animation-delay: 0.55s; }
+    .masonry-tile:nth-child(12) { animation-delay: 0.60s; }
+    .masonry-tile:nth-child(13) { animation-delay: 0.65s; }
+    .masonry-tile:nth-child(14) { animation-delay: 0.70s; }
+
     /* ── Lightbox ────────────────────────────────────────── */
     .lightbox {
         position: fixed;
@@ -308,10 +518,10 @@ const sortedBuilds = builds.sort((a, b) => {
     let currentGalleryItems: HTMLElement[] = [];
     let currentIndex = 0;
 
-    function openLightbox(galleryIndex: number, imageIndex: number) {
+    function openLightbox(galleryId: string, imageIndex: number) {
         // Collect all items in this gallery group
         currentGalleryItems = Array.from(
-            document.querySelectorAll(`[data-gallery-index="${galleryIndex}"]`)
+            document.querySelectorAll(`[data-gallery-index="${galleryId}"]`)
         ) as HTMLElement[];
         currentIndex = imageIndex;
         showImage();
@@ -371,12 +581,21 @@ const sortedBuilds = builds.sort((a, b) => {
         showImage();
     }
 
-    // Click handlers on gallery items
+    // Click handlers on gallery items (bento grids)
     document.querySelectorAll('.gallery-item').forEach((item) => {
         item.addEventListener('click', () => {
-            const galleryIndex = parseInt((item as HTMLElement).dataset.galleryIndex || '0');
+            const galleryId = (item as HTMLElement).dataset.galleryIndex || '0';
             const imageIndex = parseInt((item as HTMLElement).dataset.imageIndex || '0');
-            openLightbox(galleryIndex, imageIndex);
+            openLightbox(galleryId, imageIndex);
+        });
+    });
+
+    // Click handlers on masonry tiles
+    document.querySelectorAll('.masonry-tile').forEach((item) => {
+        item.addEventListener('click', () => {
+            const galleryId = (item as HTMLElement).dataset.galleryIndex || 'masonry';
+            const imageIndex = parseInt((item as HTMLElement).dataset.imageIndex || '0');
+            openLightbox(galleryId, imageIndex);
         });
     });
 
@@ -398,5 +617,23 @@ const sortedBuilds = builds.sort((a, b) => {
         if (e.key === 'Escape') closeLightbox();
         if (e.key === 'ArrowRight') nextImage();
         if (e.key === 'ArrowLeft') prevImage();
+    });
+
+    // ── Intersection Observer for masonry reveal ────────
+    const masonryObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    (entry.target as HTMLElement).style.animationPlayState = 'running';
+                    masonryObserver.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    document.querySelectorAll('.masonry-tile').forEach((tile) => {
+        (tile as HTMLElement).style.animationPlayState = 'paused';
+        masonryObserver.observe(tile);
     });
 </script>
