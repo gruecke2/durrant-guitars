@@ -225,49 +225,69 @@ const testimonials = (await getCollection("testimonials")).sort(
                 </h2>
             </div>
 
-            {
-                testimonials.map((t, i) => (
-                    <div
-                        class={`testimonial-card ${i % 2 === 0 ? "slide-in-right" : "slide-in-left"} delay-100`}
-                    >
-                        {t.data.photo && (
-                            <div class="testimonial-card__image-wrap">
-                                <Picture
-                                    src={t.data.photo}
-                                    alt={`${t.data.name} with a Durrant guitar`}
-                                    widths={[400, 600]}
-                                    sizes="(max-width: 768px) 100vw, 40vw"
-                                    formats={["avif", "webp"]}
-                                    class="testimonial-card__image"
-                                />
+            <div
+                class="testimonial-carousel relative overflow-hidden slide-in-left delay-100"
+            >
+                <div
+                    class="testimonial-carousel__track flex transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                >
+                    {
+                        testimonials.map((t, i) => (
+                            <div class="testimonial-slide w-full flex-[0_0_100%] min-w-full px-2 md:px-4">
+                                <div class="testimonial-card h-full">
+                                    {t.data.photo && (
+                                        <div class="testimonial-card__image-wrap">
+                                            <Picture
+                                                src={t.data.photo}
+                                                alt={`${t.data.name} with a Durrant guitar`}
+                                                widths={[400, 600]}
+                                                sizes="(max-width: 768px) 100vw, 40vw"
+                                                formats={["avif", "webp"]}
+                                                class="testimonial-card__image"
+                                            />
+                                        </div>
+                                    )}
+                                    <div class="testimonial-card__content">
+                                        <svg
+                                            class="testimonial-card__quote-icon"
+                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+                                        </svg>
+                                        <blockquote class="testimonial-card__text">
+                                            {t.data.quote}
+                                        </blockquote>
+                                        <div class="testimonial-card__author">
+                                            <span class="testimonial-card__name">
+                                                {t.data.name}
+                                            </span>
+                                            {t.data.role && (
+                                                <span class="testimonial-card__role">
+                                                    {t.data.role}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        )}
-                        <div class="testimonial-card__content">
-                            <svg
-                                class="testimonial-card__quote-icon"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
-                            </svg>
-                            <blockquote class="testimonial-card__text">
-                                {t.data.quote}
-                            </blockquote>
-                            <div class="testimonial-card__author">
-                                <span class="testimonial-card__name">
-                                    {t.data.name}
-                                </span>
-                                {t.data.role && (
-                                    <span class="testimonial-card__role">
-                                        {t.data.role}
-                                    </span>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                ))
-            }
+                        ))
+                    }
+                </div>
+
+                <div class="flex justify-center gap-3 mt-12 pb-4">
+                    {
+                        testimonials.map((_, i) => (
+                            <button
+                                class={`testimonial-dot w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === 0 ? "bg-accent scale-110" : "bg-white/20 hover:bg-white/40"}`}
+                                data-index={i}
+                                aria-label={`Go to testimonial ${i + 1}`}
+                            />
+                        ))
+                    }
+                </div>
+            </div>
         </div>
     </section>
 
@@ -645,5 +665,57 @@ const testimonials = (await getCollection("testimonials")).sort(
             .forEach((el) => {
                 slideObserver.observe(el);
             });
+
+        // ── Testimonial Carousel ──
+        const track = document.querySelector(
+            ".testimonial-carousel__track",
+        ) as HTMLElement;
+        const dots = document.querySelectorAll(".testimonial-dot");
+        let currentSlide = 0;
+        let slideInterval: number;
+
+        if (track && dots.length > 0) {
+            const numSlides = dots.length;
+
+            const goToSlide = (index: number) => {
+                currentSlide = index;
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+                dots.forEach((dot, i) => {
+                    if (i === currentSlide) {
+                        dot.classList.remove(
+                            "bg-white/20",
+                            "hover:bg-white/40",
+                        );
+                        dot.classList.add("bg-accent", "scale-110");
+                    } else {
+                        dot.classList.add("bg-white/20", "hover:bg-white/40");
+                        dot.classList.remove("bg-accent", "scale-110");
+                    }
+                });
+            };
+
+            const nextSlide = () => {
+                goToSlide((currentSlide + 1) % numSlides);
+            };
+
+            const startInterval = () => {
+                slideInterval = window.setInterval(nextSlide, 7000); // 7s auto-rotate
+            };
+
+            const resetInterval = () => {
+                window.clearInterval(slideInterval);
+                startInterval();
+            };
+
+            dots.forEach((dot, i) => {
+                dot.addEventListener("click", () => {
+                    goToSlide(i);
+                    resetInterval();
+                });
+            });
+
+            startInterval();
+        }
     });
 </script>
