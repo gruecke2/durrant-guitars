@@ -54,21 +54,27 @@ echo ""
 # Step 5: Deploy to Surge
 echo -e "${YELLOW}🚀 Deploying to Surge...${NC}"
 
-# Use the domain from CNAME if it exists, otherwise prompt
+DEFAULT_DOMAIN="durrant-guitars.surge.sh"
+
+# Use the domain from CNAME if it exists, otherwise use saved or default
 if [ -f "dist/client/CNAME" ]; then
     DOMAIN=$(cat dist/client/CNAME)
-    npx surge dist/client "$DOMAIN"
 elif [ -f "SURGE_DOMAIN" ]; then
     DOMAIN=$(cat SURGE_DOMAIN)
-    npx surge dist/client "$DOMAIN"
 else
-    echo -e "${YELLOW}No saved domain found. Enter your Surge domain:${NC}"
-    read -p "(e.g. durrant-guitars.surge.sh): " DOMAIN
-    npx surge dist/client "$DOMAIN"
-    # Save for next time
-    echo "$DOMAIN" > SURGE_DOMAIN
-    echo -e "${GREEN}✓ Domain saved to SURGE_DOMAIN for next time${NC}"
+    DOMAIN="$DEFAULT_DOMAIN"
 fi
+
+echo -e "  Deploying to: ${GREEN}${DOMAIN}${NC}"
+read -p "  Press Enter to confirm, or type a different domain: " CUSTOM_DOMAIN
+if [ -n "$CUSTOM_DOMAIN" ]; then
+    DOMAIN="$CUSTOM_DOMAIN"
+fi
+
+npx surge dist/client "$DOMAIN"
+
+# Save for next time
+echo "$DOMAIN" > SURGE_DOMAIN
 
 echo ""
 echo -e "${GREEN}═══════════════════════════════════════${NC}"

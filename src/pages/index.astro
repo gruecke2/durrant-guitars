@@ -1,12 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
 import heroImage from "../assets/images/site/Durrant Head Stock Photos/headstock_closeup-front-dark_01.jpg";
-import secondaryImage from "../assets/images/site/Catalog Photos/Racketeer/racketeer_front-full_01.jpg";
-import thirdImage from "../assets/images/site/Catalog Photos/Con Artist/con-artist_closeup-fretboard_01.jpg";
+import secondaryImage from "../assets/images/site/catalog/racketeer/racketeer_front-full_01.jpg";
+import thirdImage from "../assets/images/site/catalog/con-artist/con-artist_closeup-fretboard_01.jpg";
+import tomPhoto from "../assets/images/site/Tom Photos/tom_portrait-studio_01.jpg";
 
-// Note: ensure we import some beautiful typography and colors
-const title = "Durrant Guitars";
+const testimonials = (await getCollection("testimonials")).sort(
+    (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99),
+);
 ---
 
 <Layout title="Custom Handcrafted Guitars">
@@ -24,8 +27,7 @@ const title = "Durrant Guitars";
                     widths={[800, 1200, 1600]}
                     sizes="100vw"
                     formats={["avif", "webp"]}
-                    class="w-full h-full object-cover opacity-50 scale-105 transform hover:scale-100 transition-transform duration-[10s]"
-                    style="object-position: center 35%;"
+                    class="w-full h-full object-cover opacity-50 scale-105 transform hover:scale-100 transition-transform duration-[10s] hero-img"
                     loading="eager"
                 />
             </div>
@@ -67,25 +69,19 @@ const title = "Durrant Guitars";
                 >
                     Explore Models
                 </a>
-                <a
-                    href="/create-yours"
-                    class="btn btn-outline w-full sm:w-auto text-sm tracking-widest uppercase font-semibold backdrop-blur-sm"
-                >
-                    Commission a Build
+                <a href="/create-yours" class="hero-cta-build w-full sm:w-auto">
+                    Start Your Build
                 </a>
             </div>
         </div>
 
+        <!-- Scroll indicator -->
         <div
             class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 animate-fade-in-up"
             style="animation-delay: 1.2s; animation-fill-mode: forwards;"
         >
-            <span class="text-xs uppercase tracking-[0.2em] text-gray-400"
-                >Discover</span
-            >
-            <div
-                class="w-[1px] h-12 bg-gradient-to-b from-gray-400 to-transparent"
-            >
+            <div class="scroll-indicator">
+                <div class="scroll-indicator__dot"></div>
             </div>
         </div>
     </section>
@@ -93,15 +89,17 @@ const title = "Durrant Guitars";
     <!-- Introduce the Craft -->
     <section class="py-32 bg-background relative z-10 text-center">
         <div class="container mx-auto px-4 max-w-3xl">
-            <h2 class="font-serif text-3xl md:text-5xl text-white mb-8 reveal">
+            <h2
+                class="font-serif text-3xl md:text-5xl text-white mb-8 slide-in-left"
+            >
                 Not Just Another Guitar.
             </h2>
             <div
-                class="w-16 h-[1px] bg-accent/50 mx-auto mb-8 reveal delay-100"
+                class="w-16 h-[1px] bg-accent/50 mx-auto mb-8 slide-in-right delay-100"
             >
             </div>
             <p
-                class="text-gray-400 text-lg md:text-xl leading-relaxed font-light reveal delay-200"
+                class="text-gray-400 text-lg md:text-xl leading-relaxed font-light slide-in-left delay-200"
             >
                 Every Durrant guitar is a dialogue between the luthier and the
                 artist. We don't mass-produce formulas; we source exceptional
@@ -116,7 +114,7 @@ const title = "Durrant Guitars";
     <section class="py-24 bg-surface relative">
         <div class="container mx-auto px-4">
             <div
-                class="flex flex-col md:flex-row justify-between items-end mb-16 reveal"
+                class="flex flex-col md:flex-row justify-between items-end mb-16 slide-in-right"
             >
                 <div>
                     <span
@@ -143,7 +141,7 @@ const title = "Durrant Guitars";
                 <!-- Featured Card 1 -->
                 <a
                     href="/catalog/grifter"
-                    class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-surface-light reveal delay-100"
+                    class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-surface-light slide-in-left delay-100"
                 >
                     <Picture
                         src={heroImage}
@@ -177,7 +175,7 @@ const title = "Durrant Guitars";
                 <!-- Featured Card 2 -->
                 <a
                     href="/catalog/racketeer"
-                    class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-surface-light reveal delay-200"
+                    class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-surface-light slide-in-right delay-200"
                 >
                     <Picture
                         src={secondaryImage}
@@ -210,6 +208,122 @@ const title = "Durrant Guitars";
         </div>
     </section>
 
+    <!-- Testimonial Section -->
+    <section class="py-28 bg-background relative overflow-hidden">
+        <div
+            class="absolute inset-0 z-0 bg-noise opacity-20 mix-blend-overlay pointer-events-none"
+        >
+        </div>
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-16 slide-in-left">
+                <span
+                    class="text-xs tracking-[0.2em] uppercase text-gray-500 mb-3 block"
+                    >What They Say</span
+                >
+                <h2 class="font-serif text-4xl md:text-5xl text-white">
+                    In Their Own Words
+                </h2>
+            </div>
+
+            {
+                testimonials.map((t, i) => (
+                    <div
+                        class={`testimonial-card ${i % 2 === 0 ? "slide-in-right" : "slide-in-left"} delay-100`}
+                    >
+                        {t.data.photo && (
+                            <div class="testimonial-card__image-wrap">
+                                <Picture
+                                    src={t.data.photo}
+                                    alt={`${t.data.name} with a Durrant guitar`}
+                                    widths={[400, 600]}
+                                    sizes="(max-width: 768px) 100vw, 40vw"
+                                    formats={["avif", "webp"]}
+                                    class="testimonial-card__image"
+                                />
+                            </div>
+                        )}
+                        <div class="testimonial-card__content">
+                            <svg
+                                class="testimonial-card__quote-icon"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+                            </svg>
+                            <blockquote class="testimonial-card__text">
+                                {t.data.quote}
+                            </blockquote>
+                            <div class="testimonial-card__author">
+                                <span class="testimonial-card__name">
+                                    {t.data.name}
+                                </span>
+                                {t.data.role && (
+                                    <span class="testimonial-card__role">
+                                        {t.data.role}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </section>
+
+    <!-- Meet Tom -->
+    <section class="py-28 bg-surface relative overflow-hidden">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="meet-tom-grid">
+                <div class="meet-tom-grid__image slide-in-left">
+                    <Picture
+                        src={tomPhoto}
+                        alt="Tom Durrant in his workshop"
+                        widths={[400, 600, 800]}
+                        sizes="(max-width: 768px) 100vw, 45vw"
+                        formats={["avif", "webp"]}
+                        class="w-full h-full object-cover rounded-sm"
+                    />
+                </div>
+                <div class="meet-tom-grid__content slide-in-right delay-100">
+                    <span
+                        class="text-xs tracking-[0.2em] uppercase text-gray-500 mb-3 block"
+                        >The Luthier</span
+                    >
+                    <h2 class="font-serif text-4xl md:text-5xl text-white mb-6">
+                        Meet Tom Durrant
+                    </h2>
+                    <div class="w-12 h-[1px] bg-accent/50 mb-6"></div>
+                    <p
+                        class="text-gray-400 text-lg leading-relaxed font-light mb-4"
+                    >
+                        Every Durrant guitar begins with Tom — player, builder,
+                        tone obsessive. From hand-selecting tone woods to
+                        winding custom pickups, Tom treats every build as a
+                        collaboration with the end player.
+                    </p>
+                    <p
+                        class="text-gray-400 text-lg leading-relaxed font-light mb-8"
+                    >
+                        With roots in rock, blues, and punk, he understands what
+                        a guitar needs to feel like when you're four songs deep
+                        into a set.
+                    </p>
+                    <a
+                        href="/about"
+                        class="group inline-flex items-center gap-3 text-white text-sm uppercase tracking-widest font-semibold hover:text-accent transition-colors"
+                    >
+                        Read Tom's Story
+                        <span
+                            class="transform group-hover:translate-x-2 transition-transform duration-300"
+                            >→</span
+                        >
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Available Now CTA -->
     <section class="py-32 relative overflow-hidden bg-background">
         <div
@@ -217,25 +331,21 @@ const title = "Durrant Guitars";
         >
         </div>
         <div class="absolute inset-0 z-0">
-            <!-- Deep accent radial glow from center -->
             <div
                 class="absolute inset-0"
                 style="background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(178, 4, 4, 0.18), transparent 70%);"
             >
             </div>
-            <!-- Warm ambient wash at the bottom -->
             <div
                 class="absolute inset-0"
                 style="background: radial-gradient(ellipse 120% 50% at 50% 110%, rgba(140, 20, 10, 0.2), transparent 60%);"
             >
             </div>
-            <!-- Very subtle warm highlight behind center content -->
             <div
                 class="absolute inset-0"
                 style="background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.02) 0%, transparent 40%);"
             >
             </div>
-            <!-- Side vignette for a cinematic feel -->
             <div
                 class="absolute inset-0"
                 style="background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 20%, rgba(10, 10, 10, 0.75) 100%);"
@@ -243,22 +353,23 @@ const title = "Durrant Guitars";
             </div>
         </div>
         <div class="relative z-10 container mx-auto px-4 text-center">
-            <!-- Accent line divider -->
             <div
-                class="w-12 h-[2px] mx-auto mb-10 reveal"
+                class="w-12 h-[2px] mx-auto mb-10 slide-in-left"
                 style="background: linear-gradient(90deg, transparent, #b20404, transparent);"
             >
             </div>
-            <h2 class="font-serif text-4xl md:text-5xl text-white mb-6 reveal">
+            <h2
+                class="font-serif text-4xl md:text-5xl text-white mb-6 slide-in-right"
+            >
                 Ready to Ship.
             </h2>
             <p
-                class="text-gray-300 mb-10 max-w-xl mx-auto text-lg font-light reveal delay-100"
+                class="text-gray-300 mb-10 max-w-xl mx-auto text-lg font-light slide-in-left delay-100"
             >
                 Don't want to wait for a custom build? Browse our current
                 inventory of handcrafted guitars, available now.
             </p>
-            <div class="reveal delay-200 inline-block">
+            <div class="slide-in-right delay-200 inline-block">
                 <a
                     href="/available"
                     class="btn bg-white text-black hover:bg-gray-200 uppercase tracking-widest text-sm font-semibold px-8"
@@ -271,6 +382,227 @@ const title = "Durrant Guitars";
 </Layout>
 
 <style>
+    /* ── Hero Image 1080p positioning ──────────────────── */
+    .hero-img {
+        object-position: center 30%;
+    }
+    @media (min-width: 1920px) {
+        .hero-img {
+            object-position: center 25%;
+        }
+    }
+    @media (min-height: 900px) and (max-height: 1100px) {
+        .hero-img {
+            object-position: center 28%;
+        }
+    }
+
+    /* ── Hero CTA — "Start Your Build" accent button ──── */
+    .hero-cta-build {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 2rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: white;
+        background: linear-gradient(135deg, #b20404, #8a0303);
+        border: 1px solid rgba(178, 4, 4, 0.6);
+        border-radius: 2px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        box-shadow:
+            0 0 20px rgba(178, 4, 4, 0.2),
+            0 0 40px rgba(178, 4, 4, 0.1);
+    }
+    .hero-cta-build::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.1),
+            transparent 50%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    .hero-cta-build:hover {
+        transform: translateY(-2px);
+        box-shadow:
+            0 0 30px rgba(178, 4, 4, 0.4),
+            0 0 60px rgba(178, 4, 4, 0.2);
+        border-color: rgba(178, 4, 4, 0.9);
+    }
+    .hero-cta-build:hover::before {
+        opacity: 1;
+    }
+
+    /* ── Scroll Indicator (replaces "Discover" text) ──── */
+    .scroll-indicator {
+        width: 20px;
+        height: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        position: relative;
+    }
+    .scroll-indicator__dot {
+        width: 3px;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 2px;
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: scroll-pulse 2s ease-in-out infinite;
+    }
+    @keyframes scroll-pulse {
+        0%,
+        100% {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        50% {
+            opacity: 0.3;
+            transform: translateX(-50%) translateY(12px);
+        }
+    }
+
+    /* ── Slide-In Animations ──────────────────────────── */
+    .slide-in-left,
+    .slide-in-right {
+        opacity: 0;
+        transition:
+            opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+            transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        will-change: opacity, transform;
+    }
+    .slide-in-left {
+        transform: translateX(-40px);
+    }
+    .slide-in-right {
+        transform: translateX(40px);
+    }
+    .slide-in-left.active,
+    .slide-in-right.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* ── Testimonial Card ─────────────────────────────── */
+    .testimonial-card {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    @media (min-width: 768px) {
+        .testimonial-card {
+            flex-direction: row;
+            min-height: 400px;
+        }
+    }
+    .testimonial-card__image-wrap {
+        flex: 0 0 40%;
+        overflow: hidden;
+        max-height: 400px;
+    }
+    @media (min-width: 768px) {
+        .testimonial-card__image-wrap {
+            max-height: none;
+        }
+    }
+    .testimonial-card__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 20%;
+    }
+    .testimonial-card__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2.5rem;
+    }
+    @media (min-width: 768px) {
+        .testimonial-card__content {
+            padding: 3rem;
+        }
+    }
+    .testimonial-card__quote-icon {
+        width: 2rem;
+        height: 2rem;
+        color: rgba(178, 4, 4, 0.4);
+        margin-bottom: 1.5rem;
+        flex-shrink: 0;
+    }
+    .testimonial-card__text {
+        font-family: "Playfair Display", serif;
+        font-size: 1.25rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.9);
+        font-style: italic;
+        font-weight: 400;
+        margin-bottom: 2rem;
+    }
+    @media (min-width: 768px) {
+        .testimonial-card__text {
+            font-size: 1.4rem;
+        }
+    }
+    .testimonial-card__author {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 1.5rem;
+    }
+    .testimonial-card__name {
+        color: white;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+    .testimonial-card__role {
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.8rem;
+        font-weight: 300;
+    }
+
+    /* ── Meet Tom Grid ────────────────────────────────── */
+    .meet-tom-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+    @media (min-width: 768px) {
+        .meet-tom-grid {
+            grid-template-columns: 0.9fr 1fr;
+            gap: 4rem;
+        }
+    }
+    .meet-tom-grid__image {
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        border-radius: 2px;
+    }
+    @media (min-width: 768px) {
+        .meet-tom-grid__image {
+            aspect-ratio: 3 / 4;
+        }
+    }
+
+    /* ── Shared Animations ────────────────────────────── */
     @keyframes fade-in-up {
         0% {
             opacity: 0;
@@ -288,8 +620,30 @@ const title = "Durrant Guitars";
         animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
-    /* SVG Grain Noise for deep texture */
     .bg-noise {
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 </style>
+
+<script>
+    // ── Intersection Observer for slide-in animations ──
+    document.addEventListener("DOMContentLoaded", () => {
+        const slideObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                        slideObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15, rootMargin: "0px" },
+        );
+
+        document
+            .querySelectorAll(".slide-in-left, .slide-in-right")
+            .forEach((el) => {
+                slideObserver.observe(el);
+            });
+    });
+</script>

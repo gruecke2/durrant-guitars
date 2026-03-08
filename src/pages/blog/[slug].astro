@@ -1,0 +1,180 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("posts");
+    return posts
+        .filter((p) => !p.data.draft)
+        .map((post) => ({
+            params: { slug: post.slug },
+            props: { post },
+        }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const formattedDate = new Date(post.data.date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
+---
+
+<Layout title={post.data.title} description={post.data.excerpt}>
+    <article class="py-24 bg-background">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <!-- Header -->
+            <div class="text-center mb-12 reveal">
+                <time class="post-date">{formattedDate}</time>
+                <h1 class="post-title">{post.data.title}</h1>
+            </div>
+
+            <!-- Cover Image -->
+            {
+                post.data.coverImage && (
+                    <div class="post-cover reveal">
+                        <Picture
+                            src={post.data.coverImage}
+                            alt={post.data.title}
+                            widths={[600, 900, 1200]}
+                            sizes="(max-width: 768px) 100vw, 768px"
+                            formats={["avif", "webp"]}
+                            class="w-full h-full object-cover rounded-sm"
+                        />
+                    </div>
+                )
+            }
+
+            <!-- Content -->
+            <div class="prose reveal">
+                <Content />
+            </div>
+
+            <!-- Back link -->
+            <div class="mt-16 pt-8 border-t border-white/10 reveal">
+                <a href="/blog" class="back-link"> ← Back to Blog </a>
+            </div>
+        </div>
+    </article>
+</Layout>
+
+<style>
+    .post-date {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: rgba(255, 255, 255, 0.35);
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .post-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        color: white;
+        line-height: 1.2;
+        font-weight: 700;
+    }
+
+    .post-cover {
+        margin-bottom: 3rem;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        border-radius: 4px;
+    }
+
+    /* ── Prose styling for rendered markdown ──────────── */
+    .prose {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 1.05rem;
+        line-height: 1.85;
+        font-weight: 300;
+    }
+
+    .prose :global(h2) {
+        font-family: "Playfair Display", serif;
+        color: white;
+        font-size: 1.75rem;
+        font-weight: 600;
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .prose :global(h3) {
+        font-family: "Playfair Display", serif;
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .prose :global(p) {
+        margin-bottom: 1.5rem;
+    }
+
+    .prose :global(strong) {
+        color: white;
+        font-weight: 600;
+    }
+
+    .prose :global(em) {
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    .prose :global(ul),
+    .prose :global(ol) {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .prose :global(li) {
+        margin-bottom: 0.5rem;
+    }
+
+    .prose :global(a) {
+        color: #b20404;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        transition: color 0.2s;
+    }
+    .prose :global(a:hover) {
+        color: #d42020;
+    }
+
+    .prose :global(blockquote) {
+        border-left: 2px solid rgba(178, 4, 4, 0.5);
+        padding-left: 1.5rem;
+        margin: 2rem 0;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .prose :global(hr) {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        margin: 2.5rem 0;
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+    .back-link:hover {
+        color: white;
+    }
+</style>

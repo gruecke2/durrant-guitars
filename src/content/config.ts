@@ -50,5 +50,15 @@ const testimonials = defineCollection({
     order: z.number().optional(),
   }),
 });
+const posts = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    date: z.string(),
+    excerpt: z.string(),
+    coverImage: image().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
 
-export const collections = { catalog, available, testimonials, gallery };
+export const collections = { catalog, available, testimonials, gallery, posts };
