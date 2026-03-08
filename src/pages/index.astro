@@ -14,74 +14,87 @@ const testimonials = (await getCollection("testimonials")).sort(
 
 <Layout title="Custom Handcrafted Guitars">
     <!-- Hero Section -->
-    <section
-        class="relative min-h-[600px] h-[75vh] max-h-[900px] flex items-center justify-center overflow-hidden"
-    >
+    <section id="hero-section" class="relative h-[150vh] bg-black">
         <div
-            class="absolute inset-0 z-0 bg-black flex justify-center overflow-hidden"
+            id="hero-sticky"
+            class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center"
         >
-            <div class="relative w-full h-full max-w-[1545px]">
-                <Picture
-                    src={heroImage}
-                    alt="Custom Durrant Guitar"
-                    widths={[800, 1200, 1600]}
-                    sizes="100vw"
-                    formats={["avif", "webp"]}
-                    class="w-full h-full object-cover opacity-50 scale-105 transform hover:scale-100 transition-transform duration-[10s] hero-img"
-                    loading="eager"
-                />
-            </div>
+            <!-- Image Container -->
             <div
-                class="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"
+                class="absolute inset-0 z-0 bg-black flex justify-center overflow-hidden"
             >
-            </div>
-            <div
-                class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background/30"
-            >
-            </div>
-        </div>
-
-        <div
-            class="relative z-10 container mx-auto text-center px-4 max-w-4xl pt-20"
-        >
-            <h1
-                class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 opacity-0 animate-fade-in-up"
-                style="animation-delay: 0.2s; animation-fill-mode: forwards;"
-            >
-                Mastery in <br /><span class="text-gray-300 italic"
-                    >Every Detail</span
+                <div
+                    id="hero-img-wrap"
+                    class="relative w-full h-full max-w-[1545px] origin-center transform scale-[1.12] will-change-transform"
                 >
-            </h1>
-            <p
-                class="text-lg md:text-xl text-gray-300 mb-10 tracking-wide font-light max-w-2xl mx-auto opacity-0 animate-fade-in-up"
-                style="animation-delay: 0.5s; animation-fill-mode: forwards;"
-            >
-                Bespoke instruments crafted for those who demand excellence and
-                uncompromising tone.
-            </p>
-            <div
-                class="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0 animate-fade-in-up"
-                style="animation-delay: 0.8s; animation-fill-mode: forwards;"
-            >
-                <a
-                    href="/catalog"
-                    class="btn btn-primary w-full sm:w-auto text-sm tracking-widest uppercase font-semibold"
-                >
-                    Explore Models
-                </a>
-                <a href="/create-yours" class="hero-cta-build w-full sm:w-auto">
-                    Start Your Build
-                </a>
-            </div>
-        </div>
+                    <Picture
+                        src={heroImage}
+                        alt="Custom Durrant Guitar"
+                        widths={[800, 1200, 1600, 2400]}
+                        sizes="100vw"
+                        formats={["avif", "webp"]}
+                        class="w-full h-full object-cover hero-img"
+                        loading="eager"
+                    />
+                </div>
 
-        <!-- Scroll indicator -->
-        <div
-            class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 animate-fade-in-up"
-            style="animation-delay: 1.2s; animation-fill-mode: forwards;"
-        >
-            <div class="scroll-indicator">
-                <div class="scroll-indicator__dot"></div>
+                <!-- Gradients that fade in on scroll -->
+                <div
+                    id="hero-gradient-1"
+                    class="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent opacity-0 will-change-opacity"
+                >
+                </div>
+                <div
+                    id="hero-gradient-2"
+                    class="absolute inset-0 bg-gradient-to-r from-background/90 via-transparent to-background/30 opacity-0 will-change-opacity"
+                >
+                </div>
+            </div>
+
+            <!-- Content Container -->
+            <div
+                id="hero-content"
+                class="relative z-10 container mx-auto text-center px-4 max-w-4xl pt-20 opacity-0 translate-y-12 will-change-[opacity,transform]"
+            >
+                <h1
+                    class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6"
+                >
+                    Mastery in <br /><span class="text-gray-300 italic"
+                        >Every Detail</span
+                    >
+                </h1>
+                <p
+                    class="text-lg md:text-xl text-gray-300 mb-10 tracking-wide font-light max-w-2xl mx-auto"
+                >
+                    Bespoke instruments crafted for those who demand excellence
+                    and uncompromising tone.
+                </p>
+                <div
+                    class="flex flex-col sm:flex-row items-center justify-center gap-6"
+                >
+                    <a
+                        href="/catalog"
+                        class="btn btn-primary w-full sm:w-auto text-sm tracking-widest uppercase font-semibold"
+                    >
+                        Explore Models
+                    </a>
+                    <a
+                        href="/create-yours"
+                        class="hero-cta-build w-full sm:w-auto"
+                    >
+                        Start Your Build
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div
+                id="hero-scroll-indicator"
+                class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 transition-opacity duration-300"
+            >
+                <div class="scroll-indicator">
+                    <div class="scroll-indicator__dot"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -402,18 +415,37 @@ const testimonials = (await getCollection("testimonials")).sort(
 </Layout>
 
 <style>
-    /* ── Hero Image 1080p positioning ──────────────────── */
+    /* ── Hero Image Positioning & Layout ──────────────────── */
     .hero-img {
+        /* Default constraint, typically mobile */
         object-position: center 30%;
     }
-    @media (min-width: 1920px) {
+
+    /* Small laptops / Tablets */
+    @media (min-width: 768px) and (max-height: 900px) {
         .hero-img {
-            object-position: center 25%;
+            object-position: center 85%;
         }
     }
-    @media (min-height: 900px) and (max-height: 1100px) {
+
+    /* 1080p and general desktop heights (1080px tall) */
+    @media (min-width: 1024px) and (min-height: 900px) and (max-height: 1200px) {
         .hero-img {
-            object-position: center 28%;
+            object-position: center 75%;
+        }
+    }
+
+    /* 1440p and larger external monitors */
+    @media (min-width: 1920px) {
+        .hero-img {
+            object-position: center 65%;
+        }
+    }
+
+    /* Ultra-tall desktop monitors */
+    @media (min-height: 1200px) {
+        .hero-img {
+            object-position: center 60%;
         }
     }
 
@@ -716,6 +748,70 @@ const testimonials = (await getCollection("testimonials")).sort(
             });
 
             startInterval();
+        }
+
+        // ── Hero Scroll Effect ──
+        const heroSection = document.getElementById("hero-section");
+        const heroImgWrap = document.getElementById("hero-img-wrap");
+        const heroContent = document.getElementById("hero-content");
+        const heroGradient1 = document.getElementById("hero-gradient-1");
+        const heroGradient2 = document.getElementById("hero-gradient-2");
+        const heroScrollIndicator = document.getElementById(
+            "hero-scroll-indicator",
+        );
+
+        if (heroSection && heroImgWrap && heroContent) {
+            let ticking = false;
+
+            const updateHero = () => {
+                const rect = heroSection.getBoundingClientRect();
+                const scrollRange = window.innerHeight * 0.5; // Animate over 50vh of scrolling
+
+                let progress = 0;
+                if (rect.top < 0) {
+                    progress = Math.min(
+                        1,
+                        Math.max(0, -rect.top / scrollRange),
+                    );
+                }
+
+                if (heroScrollIndicator) {
+                    heroScrollIndicator.style.opacity =
+                        progress > 0.05 ? "0" : "1";
+                }
+
+                // Smooth easing
+                const easedProgress = progress * (2 - progress);
+
+                // Image zooms out smoothly
+                const scale = 1.12 - 0.12 * easedProgress;
+                heroImgWrap.style.transform = `scale(${scale})`;
+
+                // Gradients fade in to improve text readability
+                const opacityStr = easedProgress.toString();
+                if (heroGradient1) heroGradient1.style.opacity = opacityStr;
+                if (heroGradient2) heroGradient2.style.opacity = opacityStr;
+
+                // Content fades in and floats up
+                heroContent.style.opacity = opacityStr;
+                heroContent.style.transform = `translateY(${40 - 40 * easedProgress}px)`;
+
+                ticking = false;
+            };
+
+            window.addEventListener(
+                "scroll",
+                () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(updateHero);
+                        ticking = true;
+                    }
+                },
+                { passive: true },
+            );
+
+            // Initial call to set state
+            updateHero();
         }
     });
 </script>
