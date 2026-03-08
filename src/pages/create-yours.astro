@@ -25,34 +25,21 @@ import Layout from "../layouts/Layout.astro";
                 class="bg-surface p-8 md:p-12 rounded-sm border border-white/5 shadow-2xl reveal delay-100"
             >
                 <form
-                    action="https://api.web3forms.com/submit"
+                    action="https://formsubmit.co/Tom.e.durrant@gmail.com"
                     method="POST"
+                    enctype="multipart/form-data"
                     class="space-y-8"
                     id="buildForm"
                 >
-                    <!-- Replace with a real Web3Forms access key from the client -->
+                    <!-- FormSubmit Configuration -->
                     <input
                         type="hidden"
-                        name="access_key"
-                        value="YOUR_ACCESS_KEY_HERE"
-                    />
-                    <input
-                        type="hidden"
-                        name="subject"
+                        name="_subject"
                         value="New Custom Build Inquiry — Durrant Guitars"
                     />
-                    <input
-                        type="hidden"
-                        name="from_name"
-                        value="Durrant Guitars Website"
-                    />
-                    <!-- Redirect URL after submission -->
-                    <input
-                        type="checkbox"
-                        name="botcheck"
-                        class="hidden"
-                        style="display: none;"
-                    />
+                    <input type="hidden" name="_template" value="table" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="text" name="_honey" style="display:none" />
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Contact Info -->
@@ -278,24 +265,21 @@ import Layout from "../layouts/Layout.astro";
             form.addEventListener("submit", function (e) {
                 e.preventDefault();
                 const formData = new FormData(form);
-                const object = Object.fromEntries(formData);
-                const json = JSON.stringify(object);
 
                 result.innerHTML = "Sending...";
                 result.className =
                     "text-center mt-4 text-sm text-gray-400 block";
 
-                fetch("https://api.web3forms.com/submit", {
+                fetch("https://formsubmit.co/ajax/Tom.e.durrant@gmail.com", {
                     method: "POST",
+                    body: formData,
                     headers: {
-                        "Content-Type": "application/json",
                         Accept: "application/json",
                     },
-                    body: json,
                 })
                     .then(async (response) => {
                         let json = await response.json();
-                        if (response.status == 200) {
+                        if (response.status == 200 && json.success) {
                             result.innerHTML =
                                 "Inquiry sent successfully! Tom will be in contact.";
                             result.className =
@@ -303,7 +287,8 @@ import Layout from "../layouts/Layout.astro";
                             form.reset();
                         } else {
                             console.log(response);
-                            result.innerHTML = json.message;
+                            result.innerHTML =
+                                json.message || "Something went wrong.";
                             result.className =
                                 "text-center mt-4 text-sm text-red-400 block";
                         }
@@ -317,6 +302,10 @@ import Layout from "../layouts/Layout.astro";
                     .then(function () {
                         setTimeout(() => {
                             result.style.display = "none";
+                            setTimeout(() => {
+                                result.style.display = "";
+                                result.className = "hidden";
+                            }, 500);
                         }, 5000);
                     });
             });

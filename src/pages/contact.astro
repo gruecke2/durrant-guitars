@@ -33,9 +33,10 @@ import Layout from "../layouts/Layout.astro";
             >
                 <!-- Using Formsubmit.co for the simple contact form as recommended -->
                 <form
-                    action="https://formsubmit.co/tom@durrantguitars.com"
+                    action="https://formsubmit.co/Tom.e.durrant@gmail.com"
                     method="POST"
                     class="space-y-6"
+                    id="contactForm"
                 >
                     <!-- Setup Formsubmit -->
                     <input
@@ -100,6 +101,9 @@ import Layout from "../layouts/Layout.astro";
                             Send Message
                         </button>
                     </div>
+
+                    <div id="result" class="hidden text-center mt-4 text-sm">
+                    </div>
                 </form>
             </div>
 
@@ -113,9 +117,9 @@ import Layout from "../layouts/Layout.astro";
                         Email
                     </h3>
                     <a
-                        href="mailto:tom@durrantguitars.com"
+                        href="mailto:Tom.e.durrant@gmail.com"
                         class="hover:text-white transition-colors"
-                        >tom@durrantguitars.com</a
+                        >Tom.e.durrant@gmail.com</a
                     >
                 </div>
                 <div>
@@ -143,3 +147,60 @@ import Layout from "../layouts/Layout.astro";
         </div>
     </div>
 </Layout>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("contactForm") as HTMLFormElement;
+        const result = document.getElementById("result");
+
+        if (form && result) {
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+
+                result.innerHTML = "Sending...";
+                result.className =
+                    "text-center mt-4 text-sm text-gray-400 block";
+
+                fetch("https://formsubmit.co/ajax/Tom.e.durrant@gmail.com", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        Accept: "application/json",
+                    },
+                })
+                    .then(async (response) => {
+                        let json = await response.json();
+                        if (response.status == 200 && json.success) {
+                            result.innerHTML =
+                                "Message sent successfully! Tom will be in touch.";
+                            result.className =
+                                "text-center mt-4 text-sm text-green-400 block";
+                            form.reset();
+                        } else {
+                            console.log(response);
+                            result.innerHTML =
+                                json.message || "Something went wrong.";
+                            result.className =
+                                "text-center mt-4 text-sm text-red-400 block";
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        result.innerHTML = "Something went wrong!";
+                        result.className =
+                            "text-center mt-4 text-sm text-red-400 block";
+                    })
+                    .then(function () {
+                        setTimeout(() => {
+                            result.style.display = "none";
+                            setTimeout(() => {
+                                result.style.display = "";
+                                result.className = "hidden";
+                            }, 500);
+                        }, 5000);
+                    });
+            });
+        }
+    });
+</script>
