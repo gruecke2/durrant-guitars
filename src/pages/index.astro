@@ -14,7 +14,7 @@ const testimonials = (await getCollection("testimonials")).sort(
 
 <Layout title="Custom Handcrafted Guitars">
     <!-- Hero Section -->
-    <section id="hero-section" class="relative h-[150vh] bg-black">
+    <section id="hero-section" class="relative h-[200vh] bg-black">
         <div
             id="hero-sticky"
             class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center"
@@ -54,33 +54,37 @@ const testimonials = (await getCollection("testimonials")).sort(
             <!-- Content Container -->
             <div
                 id="hero-content"
-                class="relative z-10 container mx-auto text-center px-4 max-w-4xl pt-20 opacity-0 translate-y-12 will-change-[opacity,transform]"
+                class="relative z-10 container mx-auto text-center px-4 max-w-4xl pt-20"
             >
                 <h1
-                    class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6"
+                    id="hero-headline"
+                    class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 opacity-0 will-change-[opacity,transform]"
                 >
                     Mastery in <br /><span class="text-gray-300 italic"
                         >Every Detail</span
                     >
                 </h1>
                 <p
-                    class="text-lg md:text-xl text-gray-300 mb-10 tracking-wide font-light max-w-2xl mx-auto"
+                    id="hero-subhead"
+                    class="text-lg md:text-xl text-gray-300 mb-10 tracking-wide font-light max-w-2xl mx-auto opacity-0 will-change-[opacity,transform]"
                 >
                     Bespoke instruments crafted for those who demand excellence
                     and uncompromising tone.
                 </p>
                 <div
-                    class="flex flex-col sm:flex-row items-center justify-center gap-6"
+                    class="flex flex-col sm:flex-row items-center justify-center gap-6 overflow-hidden py-4"
                 >
                     <a
+                        id="hero-btn-left"
                         href="/catalog"
-                        class="btn btn-primary w-full sm:w-auto text-sm tracking-widest uppercase font-semibold"
+                        class="btn btn-primary w-full sm:w-auto text-sm tracking-widest uppercase font-semibold opacity-0 will-change-[opacity,transform]"
                     >
                         Explore Models
                     </a>
                     <a
+                        id="hero-btn-right"
                         href="/create-yours"
-                        class="hero-cta-build w-full sm:w-auto"
+                        class="hero-cta-build w-full sm:w-auto opacity-0 will-change-[opacity,transform]"
                     >
                         Start Your Build
                     </a>
@@ -753,19 +757,24 @@ const testimonials = (await getCollection("testimonials")).sort(
         // ── Hero Scroll Effect ──
         const heroSection = document.getElementById("hero-section");
         const heroImgWrap = document.getElementById("hero-img-wrap");
-        const heroContent = document.getElementById("hero-content");
         const heroGradient1 = document.getElementById("hero-gradient-1");
         const heroGradient2 = document.getElementById("hero-gradient-2");
         const heroScrollIndicator = document.getElementById(
             "hero-scroll-indicator",
         );
 
-        if (heroSection && heroImgWrap && heroContent) {
+        // Granular content targets
+        const heroHeadline = document.getElementById("hero-headline");
+        const heroSubhead = document.getElementById("hero-subhead");
+        const heroBtnLeft = document.getElementById("hero-btn-left");
+        const heroBtnRight = document.getElementById("hero-btn-right");
+
+        if (heroSection && heroImgWrap) {
             let ticking = false;
 
             const updateHero = () => {
                 const rect = heroSection.getBoundingClientRect();
-                const scrollRange = window.innerHeight * 0.5; // Animate over 50vh of scrolling
+                const scrollRange = window.innerHeight * 1.0; // Animate over 100vh of scrolling (slower)
 
                 let progress = 0;
                 if (rect.top < 0) {
@@ -780,7 +789,7 @@ const testimonials = (await getCollection("testimonials")).sort(
                         progress > 0.05 ? "0" : "1";
                 }
 
-                // Smooth easing
+                // Smooth easing for background zoom
                 const easedProgress = progress * (2 - progress);
 
                 // Image zooms out smoothly
@@ -792,9 +801,38 @@ const testimonials = (await getCollection("testimonials")).sort(
                 if (heroGradient1) heroGradient1.style.opacity = opacityStr;
                 if (heroGradient2) heroGradient2.style.opacity = opacityStr;
 
-                // Content fades in and floats up
-                heroContent.style.opacity = opacityStr;
-                heroContent.style.transform = `translateY(${40 - 40 * easedProgress}px)`;
+                // ── Granular Content Animations ──
+                // Helper to map and ease progress within a specific window [start, end]
+                const mapProgress = (start: number, end: number) => {
+                    const p = Math.max(
+                        0,
+                        Math.min(1, (progress - start) / (end - start)),
+                    );
+                    return p * (2 - p); // easeOutQuad
+                };
+
+                const pHeadline = mapProgress(0, 0.4);
+                const pSubhead = mapProgress(0.1, 0.5);
+                const pButtons = mapProgress(0.2, 0.6);
+
+                if (heroHeadline) {
+                    heroHeadline.style.opacity = pHeadline.toString();
+                    heroHeadline.style.transform = `translateY(${40 - 40 * pHeadline}px)`;
+                }
+
+                if (heroSubhead) {
+                    heroSubhead.style.opacity = pSubhead.toString();
+                    heroSubhead.style.transform = `translateY(${40 - 40 * pSubhead}px)`;
+                }
+
+                if (heroBtnLeft && heroBtnRight) {
+                    // Both buttons fade and float up together
+                    heroBtnLeft.style.opacity = pButtons.toString();
+                    heroBtnLeft.style.transform = `translateY(${40 - 40 * pButtons}px)`;
+
+                    heroBtnRight.style.opacity = pButtons.toString();
+                    heroBtnRight.style.transform = `translateY(${40 - 40 * pButtons}px)`;
+                }
 
                 ticking = false;
             };
