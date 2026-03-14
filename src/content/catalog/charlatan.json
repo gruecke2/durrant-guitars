@@ -3,21 +3,21 @@
   "slug": "charlatan",
   "style": "Double Cut",
   "tagline": "Sleek and aggressive.",
-  "description": "An SG-inspired double cutaway. Lightweight, fast, and aggressive. The Charlatan is the ultimate rock machine with unparalleled upper fret access.",
+  "description": "Tom's personal favorite.",
   "startingPrice": 1900,
   "specs": {
     "body": "Mahogany",
     "neck": "Mahogany, Slim Taper",
     "fretboard": "Rosewood",
-    "pickups": "High-output Humbuckers or P90s",
+    "pickups": "High-output Humbuckers",
     "bridge": "Tune-O-Matic or Wraparound"
   },
   "images": [
-    "../../assets/images/site/catalog/charlatan/charlatan_front-body_01.jpg",
-    "../../assets/images/site/catalog/charlatan/charlatan_front-angled_01.jpg",
-    "../../assets/images/site/catalog/charlatan/charlatan_closeup-pickups_01.jpg",
-    "../../assets/images/site/catalog/charlatan/charlatan_front-carve_01.jpg",
-    "../../assets/images/site/catalog/charlatan/charlatan_closeup-body_back_01.jpg",
-    "../../assets/images/site/catalog/charlatan/charlatan_closeup-pickups_02.jpg"
+    "../../assets/images/site/catalog/charlatan/images/0.jpg",
+    "../../assets/images/site/catalog/charlatan/images/1.jpg",
+    "../../assets/images/site/catalog/charlatan/images/2.jpg",
+    "../../assets/images/site/catalog/charlatan/images/3.jpg",
+    "../../assets/images/site/catalog/charlatan/images/4.jpg",
+    "../../assets/images/site/catalog/charlatan/images/5.jpg"
   ]
 }
