@@ -1,0 +1,40 @@
+{
+  "links": [
+    {
+      "label": "Models",
+      "href": "/catalog",
+      "isVisible": true,
+      "isCta": false
+    },
+    {
+      "label": "Available",
+      "href": "/available",
+      "isVisible": true,
+      "isCta": false
+    },
+    {
+      "label": "Gallery",
+      "href": "/gallery",
+      "isVisible": true,
+      "isCta": false
+    },
+    {
+      "label": "Blog",
+      "href": "/blog",
+      "isVisible": false,
+      "isCta": false
+    },
+    {
+      "label": "About",
+      "href": "/about",
+      "isVisible": true,
+      "isCta": false
+    },
+    {
+      "label": "Custom Build",
+      "href": "/create-yours",
+      "isVisible": true,
+      "isCta": true
+    }
+  ]
+}

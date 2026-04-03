@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import logoSquare from "../assets/images/logo/logo_only.jpg";
+import navData from "../content/navLinks.json";
 ---
 
 <header id="site-header">
@@ -19,12 +20,15 @@ import logoSquare from "../assets/images/logo/logo_only.jpg";
 
         <!-- Desktop Nav -->
         <nav class="desktop-nav">
-            <a href="/catalog">Models</a>
-            <a href="/available">Available</a>
-            <a href="/gallery">Gallery</a>
-            <a href="/blog">Blog</a>
-            <a href="/about">About</a>
-            <a href="/create-yours" class="cta-btn">Custom Build</a>
+            {
+                navData.links
+                    .filter((link) => link.isVisible)
+                    .map((link) => (
+                        <a href={link.href} class={link.isCta ? "cta-btn" : ""}>
+                            {link.label}
+                        </a>
+                    ))
+            }
         </nav>
 
         <!-- Hamburger / X button -->
@@ -44,14 +48,19 @@ import logoSquare from "../assets/images/logo/logo_only.jpg";
 <!-- Full-screen mobile nav overlay -->
 <div id="mobile-overlay" class="mobile-overlay" aria-hidden="true">
     <nav class="mobile-nav">
-        <a href="/catalog" class="mobile-link" style="--i:0">Models</a>
-        <a href="/available" class="mobile-link" style="--i:1">Available</a>
-        <a href="/gallery" class="mobile-link" style="--i:2">Gallery</a>
-        <a href="/blog" class="mobile-link" style="--i:3">Blog</a>
-        <a href="/about" class="mobile-link" style="--i:4">About</a>
-        <a href="/create-yours" class="mobile-link mobile-cta" style="--i:5"
-            >Custom Build</a
-        >
+        {
+            navData.links
+                .filter((link) => link.isVisible)
+                .map((link, idx) => (
+                    <a
+                        href={link.href}
+                        class={`mobile-link ${link.isCta ? "mobile-cta" : ""}`}
+                        style={`--i:${idx}`}
+                    >
+                        {link.label}
+                    </a>
+                ))
+        }
     </nav>
 </div>
 

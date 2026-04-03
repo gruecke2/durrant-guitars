@@ -169,6 +169,27 @@ export default config({
     },
 
     singletons: {
+        // ─── Navigation Links ─────────────────────────────────────────
+        navLinks: singleton({
+            label: 'Navigation Links',
+            path: 'src/content/navLinks',
+            format: { data: 'json' },
+            schema: {
+                links: fields.array(
+                    fields.object({
+                        label: fields.text({ label: 'Label', validation: { isRequired: true } }),
+                        href: fields.text({ label: 'URL', validation: { isRequired: true } }),
+                        isVisible: fields.checkbox({ label: 'Visible', defaultValue: true, description: 'Uncheck to hide this link from the site.' }),
+                        isCta: fields.checkbox({ label: 'Is CTA Button', defaultValue: false, description: 'Style this link as a Call-To-Action button.' }),
+                    }),
+                    {
+                        label: 'Links',
+                        itemLabel: (props) => props.fields.label.value || 'Link',
+                    }
+                ),
+            },
+        }),
+
         // ─── Workshop Photos (Masonry Grid) ───────────────────────────
         workshopPhotos: singleton({
             label: 'Workshop Photos',
