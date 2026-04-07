@@ -21,8 +21,8 @@
     {
       "label": "Blog",
       "href": "/blog",
-      "isVisible": true,
-      "isCta": true
+      "isVisible": false,
+      "isCta": false
     },
     {
       "label": "About",
