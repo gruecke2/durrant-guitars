@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "node -e \"const fs=require('fs'); fs.rmSync('.astro', {recursive:true, force:true}); fs.rmSync('node_modules/.astro', {recursive:true, force:true})\" && astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",

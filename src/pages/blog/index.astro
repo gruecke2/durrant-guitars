@@ -34,7 +34,7 @@ const posts = (await getCollection("posts"))
             <div class="blog-list">
                 {
                     posts.map((post) => (
-                        <a href={`/blog/${post.slug}`} class="blog-card reveal">
+                        <a href={`/blog/${post.id}`} class="blog-card reveal">
                             {post.data.coverImage && (
                                 <div class="blog-card__image">
                                     <Picture

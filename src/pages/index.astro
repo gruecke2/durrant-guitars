@@ -14,91 +14,37 @@ const testimonials = (await getCollection("testimonials")).sort(
 
 <Layout title="Custom Handcrafted Guitars">
     <!-- Hero Section -->
-    <section id="hero-section" class="relative h-[200vh] bg-black">
-        <div
-            id="hero-sticky"
-            class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center"
-        >
-            <!-- Image Container -->
-            <div
-                class="absolute inset-0 z-0 bg-black flex justify-center overflow-hidden"
-            >
-                <div
-                    id="hero-img-wrap"
-                    class="relative w-full h-full max-w-[1545px] origin-center transform scale-[1.12] will-change-transform"
-                >
-                    <Picture
-                        src={heroImage}
-                        alt="Custom Durrant Guitar"
-                        widths={[800, 1200, 1600, 2400]}
-                        sizes="100vw"
-                        formats={["avif", "webp"]}
-                        class="w-full h-full object-cover hero-img"
-                        loading="eager"
-                    />
-                </div>
+    <section id="hero-section" class="relative min-h-[90vh] bg-black flex items-center justify-center overflow-hidden">
+        <!-- Image Container -->
+        <div class="absolute inset-0 z-0 bg-black">
+            <Picture
+                src={heroImage}
+                alt="Custom Durrant Guitar"
+                widths={[800, 1200, 1600, 2400]}
+                sizes="100vw"
+                formats={["avif", "webp"]}
+                class="w-full h-full object-cover hero-img"
+                loading="eager"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-background/100 via-background/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-background/90 via-transparent to-background/30"></div>
+        </div>
 
-                <!-- Gradients that fade in on scroll -->
-                <div
-                    id="hero-gradient-1"
-                    class="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent opacity-0 will-change-opacity"
-                >
-                </div>
-                <div
-                    id="hero-gradient-2"
-                    class="absolute inset-0 bg-gradient-to-r from-background/90 via-transparent to-background/30 opacity-0 will-change-opacity"
-                >
-                </div>
-            </div>
-
-            <!-- Content Container -->
-            <div
-                id="hero-content"
-                class="relative z-10 container mx-auto text-center px-4 max-w-4xl pt-20"
-            >
-                <h1
-                    id="hero-headline"
-                    class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 opacity-0 will-change-[opacity,transform]"
-                >
-                    Mastery in <br /><span class="text-gray-300 italic"
-                        >Every Detail</span
-                    >
-                </h1>
-                <p
-                    id="hero-subhead"
-                    class="text-lg md:text-xl text-gray-300 mb-10 tracking-wide font-light max-w-2xl mx-auto opacity-0 will-change-[opacity,transform]"
-                >
-                    Bespoke instruments crafted for those who demand excellence
-                    and uncompromising tone.
-                </p>
-                <div
-                    class="flex flex-col sm:flex-row items-center justify-center gap-6 overflow-hidden py-4"
-                >
-                    <a
-                        id="hero-btn-left"
-                        href="/catalog"
-                        class="btn btn-primary w-full sm:w-auto text-sm tracking-widest uppercase font-semibold opacity-0 will-change-[opacity,transform]"
-                    >
-                        Explore Models
-                    </a>
-                    <a
-                        id="hero-btn-right"
-                        href="/create-yours"
-                        class="hero-cta-build w-full sm:w-auto opacity-0 will-change-[opacity,transform]"
-                    >
-                        Start Your Build
-                    </a>
-                </div>
-            </div>
-
-            <!-- Scroll indicator -->
-            <div
-                id="hero-scroll-indicator"
-                class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 transition-opacity duration-300"
-            >
-                <div class="scroll-indicator">
-                    <div class="scroll-indicator__dot"></div>
-                </div>
+        <!-- Content Container -->
+        <div class="relative z-10 container mx-auto text-center px-4 max-w-4xl pt-20">
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 animate-fade-in-up">
+                Precision, <br /><span class="text-gray-300 italic">With Personality</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-10 tracking-wide font-light max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 100ms;">
+                Authentic to you. What else even matters?
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 py-4 animate-fade-in-up" style="animation-delay: 200ms;">
+                <a href="/catalog" class="btn btn-primary w-full sm:w-auto text-sm tracking-widest uppercase font-semibold">
+                    Take a Peek
+                </a>
+                <a href="/create-yours" class="hero-cta-build w-full sm:w-auto">
+                    Start Your Build
+                </a>
             </div>
         </div>
     </section>
@@ -109,7 +55,7 @@ const testimonials = (await getCollection("testimonials")).sort(
             <h2
                 class="font-serif text-3xl md:text-5xl text-white mb-8 slide-in-left"
             >
-                Not Just Another Guitar.
+                Just How You Like It, Baby
             </h2>
             <div
                 class="w-16 h-[1px] bg-accent/50 mx-auto mb-8 slide-in-right delay-100"
@@ -118,11 +64,7 @@ const testimonials = (await getCollection("testimonials")).sort(
             <p
                 class="text-gray-400 text-lg md:text-xl leading-relaxed font-light slide-in-left delay-200"
             >
-                Every Durrant guitar is a dialogue between the luthier and the
-                artist. We don't mass-produce formulas; we source exceptional
-                tone woods, craft custom-wound electronics, and obsess over the
-                geometry of every neck. The result is an instrument that feels
-                alive in your hands.
+                It’s your guitar. It should be exactly what you want it to be. Keep it classy. Or don’t. IDGAF.
             </p>
         </div>
     </section>
@@ -136,10 +78,10 @@ const testimonials = (await getCollection("testimonials")).sort(
                 <div>
                     <span
                         class="text-xs tracking-[0.2em] uppercase text-gray-400 mb-2 block"
-                        >The Collection</span
+                        >Take a Peek</span
                     >
                     <h2 class="font-serif text-4xl text-white">
-                        Featured Models
+                        Explore Models
                     </h2>
                 </div>
                 <a
@@ -235,7 +177,7 @@ const testimonials = (await getCollection("testimonials")).sort(
             <div class="text-center mb-16 slide-in-left">
                 <span
                     class="text-xs tracking-[0.2em] uppercase text-gray-500 mb-3 block"
-                    >What They Say</span
+                    >The Tea</span
                 >
                 <h2 class="font-serif text-4xl md:text-5xl text-white">
                     In Their Own Words
@@ -325,32 +267,22 @@ const testimonials = (await getCollection("testimonials")).sort(
                 <div class="meet-tom-grid__content slide-in-right delay-100">
                     <span
                         class="text-xs tracking-[0.2em] uppercase text-gray-500 mb-3 block"
-                        >The Luthier</span
+                        >Meet Tom Durrant</span
                     >
                     <h2 class="font-serif text-4xl md:text-5xl text-white mb-6">
-                        Meet Tom Durrant
+                        This is Tom
                     </h2>
                     <div class="w-12 h-[1px] bg-accent/50 mb-6"></div>
                     <p
-                        class="text-gray-400 text-lg leading-relaxed font-light mb-4"
-                    >
-                        Every Durrant guitar begins with Tom — player, builder,
-                        tone obsessive. From hand-selecting tone woods to
-                        winding custom pickups, Tom treats every build as a
-                        collaboration with the end player.
-                    </p>
-                    <p
                         class="text-gray-400 text-lg leading-relaxed font-light mb-8"
                     >
-                        With roots in rock, blues, and punk, he understands what
-                        a guitar needs to feel like when you're four songs deep
-                        into a set.
+                        I play music, build things, and don’t take direction well. That’s how I got here. I’m a masterbuilder and I masterbuild all over every guitar I make. 
                     </p>
                     <a
                         href="/about"
                         class="group inline-flex items-center gap-3 text-white text-sm uppercase tracking-widest font-semibold hover:text-accent transition-colors"
                     >
-                        Read Tom's Story
+                        More About Tom and His Political Agenda
                         <span
                             class="transform group-hover:translate-x-2 transition-transform duration-300"
                             >→</span
@@ -358,6 +290,24 @@ const testimonials = (await getCollection("testimonials")).sort(
                     </a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="py-32 relative bg-black overflow-hidden flex items-center justify-center text-center px-4">
+        <div class="absolute inset-0 z-0 opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-tr from-[#b20404]/30 to-transparent"></div>
+            <!-- noisy bg -->
+            <div class="absolute inset-0 bg-noise opacity-30 mix-blend-overlay pointer-events-none"></div>
+        </div>
+        <div class="relative z-10 max-w-4xl mx-auto p-10 md:p-16 border border-white/10 bg-white/[0.02] backdrop-blur-md rounded-sm slide-in-left">
+            <h2 class="font-serif text-3xl md:text-5xl text-white mb-6 tracking-wide">
+                The Durrant Philosophy
+            </h2>
+            <div class="w-16 h-1 bg-accent mx-auto mb-10"></div>
+            <p class="text-xl md:text-3xl font-light text-gray-300 leading-relaxed italic font-serif">
+                "Your guitar shouldn’t fight you, it should beg for your touch. A great instrument lures you in, does things you never dreamed of, and makes you think it was your idea. You’ll soon realize your old guitars were faking it."
+            </p>
         </div>
     </section>
 
@@ -398,13 +348,12 @@ const testimonials = (await getCollection("testimonials")).sort(
             <h2
                 class="font-serif text-4xl md:text-5xl text-white mb-6 slide-in-right"
             >
-                Ready to Ship.
+                No Patience? I’ve Got You
             </h2>
             <p
                 class="text-gray-300 mb-10 max-w-xl mx-auto text-lg font-light slide-in-left delay-100"
             >
-                Don't want to wait for a custom build? Browse our current
-                inventory of handcrafted guitars, available now.
+                These are done and ready to go.
             </p>
             <div class="slide-in-right delay-200 inline-block">
                 <a
@@ -754,102 +703,6 @@ const testimonials = (await getCollection("testimonials")).sort(
             startInterval();
         }
 
-        // ── Hero Scroll Effect ──
-        const heroSection = document.getElementById("hero-section");
-        const heroImgWrap = document.getElementById("hero-img-wrap");
-        const heroGradient1 = document.getElementById("hero-gradient-1");
-        const heroGradient2 = document.getElementById("hero-gradient-2");
-        const heroScrollIndicator = document.getElementById(
-            "hero-scroll-indicator",
-        );
-
-        // Granular content targets
-        const heroHeadline = document.getElementById("hero-headline");
-        const heroSubhead = document.getElementById("hero-subhead");
-        const heroBtnLeft = document.getElementById("hero-btn-left");
-        const heroBtnRight = document.getElementById("hero-btn-right");
-
-        if (heroSection && heroImgWrap) {
-            let ticking = false;
-
-            const updateHero = () => {
-                const rect = heroSection.getBoundingClientRect();
-                const scrollRange = window.innerHeight * 1.0; // Animate over 100vh of scrolling (slower)
-
-                let progress = 0;
-                if (rect.top < 0) {
-                    progress = Math.min(
-                        1,
-                        Math.max(0, -rect.top / scrollRange),
-                    );
-                }
-
-                if (heroScrollIndicator) {
-                    heroScrollIndicator.style.opacity =
-                        progress > 0.05 ? "0" : "1";
-                }
-
-                // Smooth easing for background zoom
-                const easedProgress = progress * (2 - progress);
-
-                // Image zooms out smoothly
-                const scale = 1.12 - 0.12 * easedProgress;
-                heroImgWrap.style.transform = `scale(${scale})`;
-
-                // Gradients fade in to improve text readability
-                const opacityStr = easedProgress.toString();
-                if (heroGradient1) heroGradient1.style.opacity = opacityStr;
-                if (heroGradient2) heroGradient2.style.opacity = opacityStr;
-
-                // ── Granular Content Animations ──
-                // Helper to map and ease progress within a specific window [start, end]
-                const mapProgress = (start: number, end: number) => {
-                    const p = Math.max(
-                        0,
-                        Math.min(1, (progress - start) / (end - start)),
-                    );
-                    return p * (2 - p); // easeOutQuad
-                };
-
-                const pHeadline = mapProgress(0, 0.4);
-                const pSubhead = mapProgress(0.1, 0.5);
-                const pButtons = mapProgress(0.2, 0.6);
-
-                if (heroHeadline) {
-                    heroHeadline.style.opacity = pHeadline.toString();
-                    heroHeadline.style.transform = `translateY(${40 - 40 * pHeadline}px)`;
-                }
-
-                if (heroSubhead) {
-                    heroSubhead.style.opacity = pSubhead.toString();
-                    heroSubhead.style.transform = `translateY(${40 - 40 * pSubhead}px)`;
-                }
-
-                if (heroBtnLeft && heroBtnRight) {
-                    // Both buttons fade and float up together
-                    heroBtnLeft.style.opacity = pButtons.toString();
-                    heroBtnLeft.style.transform = `translateY(${40 - 40 * pButtons}px)`;
-
-                    heroBtnRight.style.opacity = pButtons.toString();
-                    heroBtnRight.style.transform = `translateY(${40 - 40 * pButtons}px)`;
-                }
-
-                ticking = false;
-            };
-
-            window.addEventListener(
-                "scroll",
-                () => {
-                    if (!ticking) {
-                        window.requestAnimationFrame(updateHero);
-                        ticking = true;
-                    }
-                },
-                { passive: true },
-            );
-
-            // Initial call to set state
-            updateHero();
-        }
+        // Hero Scroll Effect Removed.
     });
 </script>
