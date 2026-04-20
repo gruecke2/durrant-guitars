@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import BuildTierPicker from "../components/BuildTierPicker.astro";
 ---
 
 <Layout
@@ -118,19 +119,29 @@ import Layout from "../layouts/Layout.astro";
                                     <option value="" disabled selected
                                         >Select a model...</option
                                     >
-                                    <option value="Charlatan"
+                                    <option
+                                        value="Charlatan"
+                                        data-catalog-slug="charlatan"
                                         >The Charlatan (SG Style)</option
                                     >
-                                    <option value="Con Artist"
+                                    <option
+                                        value="Con Artist"
+                                        data-catalog-slug="con-artist"
                                         >The Con Artist (Single Cut)</option
                                     >
-                                    <option value="Grifter"
+                                    <option
+                                        value="Grifter"
+                                        data-catalog-slug="grifter"
                                         >The Grifter (Tele Style)</option
                                     >
-                                    <option value="Swindler"
+                                    <option
+                                        value="Swindler"
+                                        data-catalog-slug="swindler"
                                         >The Swindler (S-Style)</option
                                     >
-                                    <option value="Racketeer"
+                                    <option
+                                        value="Racketeer"
+                                        data-catalog-slug="racketeer"
                                         >The Racketeer (Offset)</option
                                     >
                                     <option value="Other"
@@ -139,27 +150,27 @@ import Layout from "../layouts/Layout.astro";
                                 </select>
                             </div>
 
+                            <input
+                                type="hidden"
+                                name="buildTierSummary"
+                                id="buildTierSummary"
+                                value=""
+                            />
+
                             <div>
-                                <label
-                                    for="budget"
-                                    class="block text-sm font-medium text-gray-300 mb-2"
-                                    >Estimated Budget</label
-                                >
-                                <select
-                                    id="budget"
-                                    name="budget"
-                                    class="w-full bg-surface-light border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 transition-colors appearance-none"
-                                >
-                                    <option value="$1,800 - $2,500"
-                                        >$1,800 - $2,500 (Standard Tier)</option
-                                    >
-                                    <option value="$2,500 - $3,500"
-                                        >$2,500 - $3,500 (Premium Woods & Specs)</option
-                                    >
-                                    <option value="$3,500+"
-                                        >$3,500+ (Masterbuild)</option
-                                    >
-                                </select>
+                                <BuildTierPicker
+                                    idPrefix="commission"
+                                    showBuildLink={false}
+                                    selectName="buildTier"
+                                    summaryInputId="buildTierSummary"
+                                    controlLabel="Build tier"
+                                    priceClass="text-xl text-white font-semibold tabular-nums"
+                                    wrapperClass="space-y-2"
+                                />
+                                <p class="text-xs text-gray-500 mt-3 font-light leading-relaxed">
+                                    Tier pricing is a starting point; final quotes depend on materials,
+                                    complexity, and timeline.
+                                </p>
                             </div>
 
                             <div>
@@ -238,22 +249,43 @@ import Layout from "../layouts/Layout.astro";
         if (modelParam) {
             const select = document.getElementById(
                 "baseModel",
-            ) as HTMLSelectElement;
-            const options = Array.from(select.options);
+            ) as HTMLSelectElement | null;
 
-            // Find matching option (case insensitive, partial match)
-            const match = options.find(
-                (opt) =>
-                    opt.value
-                        .toLowerCase()
-                        .includes(modelParam.toLowerCase().replace("-", " ")) ||
-                    modelParam
-                        .toLowerCase()
-                        .includes(opt.value.toLowerCase().replace(" ", "-")),
-            );
+            if (select) {
+                const normalized = decodeURIComponent(modelParam)
+                    .toLowerCase()
+                    .trim();
 
-            if (match) {
-                match.selected = true;
+                const options = Array.from(select.options);
+                // Prefer explicit catalog URL slugs (e.g. /catalog/swindler → ?model=swindler)
+                let match = options.find(
+                    (opt) =>
+                        opt.dataset.catalogSlug &&
+                        opt.dataset.catalogSlug === normalized,
+                );
+
+                if (!match) {
+                    // Fallback: label/value fuzzy match for older links or manual URLs
+                    match = options.find(
+                        (opt) =>
+                            !opt.disabled &&
+                            opt.value &&
+                            (opt.value
+                                .toLowerCase()
+                                .includes(
+                                    normalized.replace(/-/g, " "),
+                                ) ||
+                                normalized.includes(
+                                    opt.value
+                                        .toLowerCase()
+                                        .replace(/\s+/g, "-"),
+                                )),
+                    );
+                }
+
+                if (match?.value) {
+                    select.value = match.value;
+                }
             }
         }
 

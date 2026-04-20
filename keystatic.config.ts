@@ -18,14 +18,21 @@ export default config({
                 style: fields.text({ label: 'Style (e.g. Tele, Offset, Single Cut)', validation: { isRequired: true } }),
                 tagline: fields.text({ label: 'Tagline', validation: { isRequired: true } }),
                 description: fields.text({ label: 'Description', multiline: true, validation: { isRequired: true } }),
-                startingPrice: fields.integer({ label: 'Starting Price ($)', validation: { isRequired: true } }),
+                startingPrice: fields.integer({
+                    label: 'Reference starting price ($) — legacy',
+                    description: 'Optional. The live site uses the public build tier ladder (Tier 1 starts at $2,500).',
+                    validation: { isRequired: false },
+                }),
                 specs: fields.object({
-                    body: fields.text({ label: 'Body' }),
-                    neck: fields.text({ label: 'Neck' }),
-                    fretboard: fields.text({ label: 'Fretboard' }),
-                    pickups: fields.text({ label: 'Pickups' }),
-                    bridge: fields.text({ label: 'Bridge' }),
-                }, { label: 'Specifications' }),
+                    body: fields.text({ label: 'Body', validation: { isRequired: false } }),
+                    neck: fields.text({ label: 'Neck', validation: { isRequired: false } }),
+                    fretboard: fields.text({ label: 'Fretboard', validation: { isRequired: false } }),
+                    pickups: fields.text({ label: 'Pickups', validation: { isRequired: false } }),
+                    bridge: fields.text({ label: 'Bridge', validation: { isRequired: false } }),
+                }, {
+                    label: 'Model notes (optional)',
+                    description: 'Optional notes for your reference. Catalog pages show tier includes from site config.',
+                }),
                 images: fields.array(
                     fields.image({
                         label: 'Photo',

@@ -1,21 +1,20 @@
 ---
-import { Image } from "astro:assets";
-import logoSquare from "../assets/images/logo/logo_only.jpg";
+import logoSvgUrl from "../assets/images/logo/Durrant-Logo-Vector.svg?url";
 import navData from "../content/navLinks.json";
 ---
 
 <header id="site-header">
     <div class="header-inner">
-        <!-- Logo -->
+        <!-- Logo (wordmark in SVG — no separate text) -->
         <a href="/" class="logo-link">
-            <Image
-                src={logoSquare}
-                alt="Durrant Guitars Logo"
-                width={80}
-                height={80}
+            <img
+                src={logoSvgUrl}
+                alt="Durrant Guitars"
+                width="640"
+                height="373"
                 class="logo-img"
+                decoding="async"
             />
-            <span class="logo-text">DURRANT</span>
         </a>
 
         <!-- Desktop Nav -->
@@ -82,32 +81,49 @@ import navData from "../content/navLinks.json";
         justify-content: space-between;
         max-width: 1280px;
         margin: 0 auto;
-        padding: 0 1.5rem;
-        height: 68px; /* fixed height — never shifts */
+        padding: 0.5rem 1.5rem;
+        min-height: 5.5rem; /* room for wide wordmark */
     }
 
     /* ── Logo ────────────────────────────────────────────────── */
     .logo-link {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        flex-shrink: 0;
         text-decoration: none;
         position: relative;
         z-index: 1001; /* stays above overlay */
     }
 
     .logo-img {
-        height: 2.5rem;
-        width: 2.5rem;
+        display: block;
+        width: auto;
+        /* Wide SVG: drive size by height so width grows with aspect ratio (~1.71:1) */
+        height: clamp(3.25rem, 9vw, 5.75rem);
+        max-height: 5.75rem;
+        max-width: min(calc(100vw - 4.75rem), 36rem);
         object-fit: contain;
     }
 
-    .logo-text {
-        font-family: Georgia, serif;
-        font-size: 1.2rem;
-        font-weight: 600;
-        letter-spacing: 0.15em;
-        color: #fff;
+    @media (min-width: 768px) {
+        .header-inner {
+            min-height: 5.75rem;
+            padding: 0.6rem 1.5rem;
+        }
+
+        .logo-img {
+            height: clamp(3.75rem, 5.5vw, 6.25rem);
+            max-height: 6.25rem;
+            max-width: min(55vw, 40rem);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .logo-img {
+            height: clamp(4rem, 4.25vw, 6.5rem);
+            max-height: 6.5rem;
+            max-width: 42rem;
+        }
     }
 
     /* ── Desktop nav ─────────────────────────────────────────── */

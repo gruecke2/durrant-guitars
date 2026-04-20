@@ -1,0 +1,233 @@
+---
+import {
+    BUILD_TIERS,
+    cumulativeBullets,
+    formatTierPrice,
+    type BuildTierSlug,
+} from '../data/buildTiers';
+
+interface Props {
+    /** Prefix for generated element ids (must be unique per page) */
+    idPrefix: string;
+    /** If set, “Start your build” includes `model=` in the query string */
+    modelSlug?: string;
+    /** Base path for the build CTA (default commission page) */
+    buildPath?: string;
+    /**
+     * When set, the tier bullet list is updated on this element (anywhere on the page).
+     * When omitted and `showSpecsList` is true, a list is rendered inside this component.
+     */
+    specsUlId?: string;
+    /** Render a default spec bullet list inside this component */
+    showSpecsList?: boolean;
+    /** Render the primary “Start your build” link */
+    showBuildLink?: boolean;
+    /**
+     * When set, href is written to this existing element instead of rendering
+     * the default `<a id="…-tier-build-link">`.
+     */
+    externalBuildLinkId?: string;
+    /** Label shown above the tier control */
+    controlLabel?: string;
+    /** Optional extra class on the outer wrapper */
+    wrapperClass?: string;
+    /** Tailwind-friendly classes for the price element */
+    priceClass?: string;
+    /** Show the tier headline under the price */
+    showTierHeadline?: boolean;
+    /** When embedded in a form, sets `<select name="…">` */
+    selectName?: string;
+    /** Optional `<input type="hidden">` id to fill with a human-readable tier line */
+    summaryInputId?: string;
+}
+
+const {
+    idPrefix,
+    modelSlug,
+    buildPath = '/create-yours',
+    specsUlId: specsUlIdProp,
+    showSpecsList = false,
+    showBuildLink = true,
+    externalBuildLinkId,
+    controlLabel = 'Build tier',
+    wrapperClass = '',
+    priceClass = 'text-3xl text-white font-medium tabular-nums',
+    showTierHeadline = true,
+    selectName,
+    summaryInputId,
+} = Astro.props;
+
+const selectId = `${idPrefix}-tier-select`;
+const priceId = `${idPrefix}-tier-price`;
+const tierNameId = `${idPrefix}-tier-name`;
+const buildLinkId = `${idPrefix}-tier-build-link`;
+const defaultSpecsId = `${idPrefix}-tier-specs`;
+const specsUlId = specsUlIdProp ?? (showSpecsList ? defaultSpecsId : '');
+const useExternalBuildLink = Boolean(externalBuildLinkId);
+
+const tierClientData = BUILD_TIERS.map((t, i) => ({
+    slug: t.slug as BuildTierSlug,
+    label: t.label,
+    headline: t.headline,
+    price: t.price,
+    priceFormatted: formatTierPrice(t.price),
+    bullets: cumulativeBullets(i),
+}));
+---
+
+<div class:list={['build-tier-picker', wrapperClass]} data-tier-picker={idPrefix}>
+    <div class="flex flex-col gap-2">
+        <label
+            for={selectId}
+            class="text-xs uppercase tracking-widest text-gray-400"
+        >
+            {controlLabel}
+        </label>
+        <select
+            id={selectId}
+            {...(selectName ? { name: selectName } : {})}
+            class="w-full bg-surface-light border border-white/10 rounded-sm px-3 py-2.5 text-sm text-white focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 transition-colors appearance-none cursor-pointer"
+            aria-describedby={`${priceId}-live`}
+        >
+            {
+                BUILD_TIERS.map((t) => (
+                    <option value={t.slug}>
+                        {t.headline} — {formatTierPrice(t.price)}
+                    </option>
+                ))
+            }
+        </select>
+    </div>
+
+    <div class="mt-3 flex flex-col gap-1">
+        <span class="text-xs uppercase tracking-widest text-gray-500">Starts at</span>
+        <span
+            id={priceId}
+            class:list={[priceClass]}
+            aria-live="polite"
+            aria-atomic="true"
+        >
+            {formatTierPrice(BUILD_TIERS[0].price)}
+        </span>
+        <span id={`${priceId}-live`} class="sr-only">
+            Updates when build tier changes
+        </span>
+        {
+            showTierHeadline && (
+                <span id={tierNameId} class="text-sm text-gray-400 font-light">
+                    {BUILD_TIERS[0].headline}
+                </span>
+            )
+        }
+    </div>
+
+    {
+        showBuildLink && !useExternalBuildLink && (
+            <a
+                id={buildLinkId}
+                href={`${buildPath}?${modelSlug ? `model=${encodeURIComponent(modelSlug)}&` : ''}tier=${BUILD_TIERS[0].slug}`}
+                class="btn btn-accent text-xs uppercase tracking-widest mt-4 text-center"
+            >
+                Start Your Build
+            </a>
+        )
+    }
+
+    {
+        showSpecsList && !specsUlIdProp && (
+            <div class="mt-10">
+                <h3
+                    class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-6 border-b border-white/10 pb-4"
+                >
+                    Included at this tier
+                </h3>
+                <ul
+                    id={defaultSpecsId}
+                    class="space-y-3 text-sm text-gray-200 leading-relaxed font-light list-disc pl-4"
+                >
+                    {cumulativeBullets(0).map((line) => <li>{line}</li>)}
+                </ul>
+            </div>
+        )
+    }
+</div>
+
+<script
+    define:vars={{
+        tierClientData,
+        selectId,
+        priceId,
+        tierNameId,
+        buildLinkId,
+        specsUlId,
+        showSpecsList,
+        showBuildLink,
+        useExternalBuildLink,
+        externalBuildLinkId,
+        modelSlug,
+        buildPath,
+        summaryInputId,
+    }}
+>
+    function buildTierHref(tierSlug) {
+        const q = new URLSearchParams();
+        if (modelSlug) q.set('model', modelSlug);
+        q.set('tier', tierSlug);
+        const qs = q.toString();
+        return qs ? `${buildPath}?${qs}` : buildPath;
+    }
+
+    function renderSpecs(tierIndex) {
+        const hasTarget = Boolean(specsUlId);
+        if (!hasTarget) return;
+        const ul = document.getElementById(specsUlId);
+        if (!ul) return;
+        const tier = tierClientData[tierIndex];
+        if (!tier) return;
+        ul.innerHTML = '';
+        for (const line of tier.bullets) {
+            const li = document.createElement('li');
+            li.textContent = line;
+            ul.appendChild(li);
+        }
+    }
+
+    function syncFromTierIndex(tierIndex) {
+        const tier = tierClientData[tierIndex];
+        if (!tier) return;
+
+        const priceEl = document.getElementById(priceId);
+        const nameEl = document.getElementById(tierNameId);
+        const linkEl = useExternalBuildLink
+            ? document.getElementById(externalBuildLinkId)
+            : document.getElementById(buildLinkId);
+
+        if (priceEl) priceEl.textContent = tier.priceFormatted;
+        if (nameEl) nameEl.textContent = tier.headline;
+        if (showBuildLink && linkEl) {
+            linkEl.setAttribute('href', buildTierHref(tier.slug));
+        }
+        if (summaryInputId) {
+            const summaryEl = document.getElementById(summaryInputId);
+            if (summaryEl && 'value' in summaryEl) {
+                summaryEl.value = `${tier.headline} — starts at ${tier.priceFormatted}`;
+            }
+        }
+        renderSpecs(tierIndex);
+    }
+
+    const select = document.getElementById(selectId);
+    if (select) {
+        const params = new URLSearchParams(window.location.search);
+        const tierSlug = params.get('tier');
+        let startIdx = tierClientData.findIndex((t) => t.slug === tierSlug);
+        if (startIdx === -1) startIdx = 0;
+        select.value = tierClientData[startIdx].slug;
+
+        select.addEventListener('change', () => {
+            const idx = tierClientData.findIndex((t) => t.slug === select.value);
+            syncFromTierIndex(idx === -1 ? 0 : idx);
+        });
+        syncFromTierIndex(startIdx);
+    }
+</script>

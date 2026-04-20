@@ -1,21 +1,21 @@
 {
   "name": "Swindler",
   "slug": "swindler",
-  "style": "Double Neck",
-  "tagline": "Double Trouble.",
-  "description": "12-String and 6-String all in one guitar. Channel your inner Jimmy Page.",
+  "style": "Strat",
+  "tagline": "Is there anything more iconic? It’s literally the guitar emoji",
+  "description": "Strat style body, classic and cool.",
   "startingPrice": 1850,
   "specs": {
     "body": "Alder or Swamp Ash",
     "neck": "Maple, Modern C",
     "fretboard": "Maple or Rosewood",
-    "pickups": "H-H",
+    "pickups": "S-S-S or H-S-S",
     "bridge": "Hardtail"
   },
   "images": [
-    "../../assets/images/site/catalog/swindler/swindler_front-angled_01.jpg",
-    "../../assets/images/site/catalog/swindler/swindler_closeup-body_01.jpg",
-    "../../assets/images/site/catalog/swindler/swindler_closeup-bridge_01.jpg",
-    "../../assets/images/site/catalog/swindler/swindler_closeup-necks_01.jpg"
+    "../../assets/images/site/catalog/swindler/images/0.jpg",
+    "../../assets/images/site/catalog/swindler/images/1.jpg",
+    "../../assets/images/site/catalog/swindler/images/2.jpg",
+    "../../assets/images/site/catalog/swindler/images/3.jpg"
   ]
 }

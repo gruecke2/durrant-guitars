@@ -10,8 +10,10 @@ const catalog = defineCollection({
         style: z.string(),
         tagline: z.string(),
         description: z.string(),
-        startingPrice: z.number(),
-        specs: z.any(),
+        /** Legacy field; public catalog uses the shared tier ladder. */
+        startingPrice: z.number().optional(),
+        /** Optional model notes; tier includes are rendered from `src/data/buildTiers.ts`. */
+        specs: z.record(z.string(), z.string()).optional(),
         images: z.array(image()),
     }),
 });

@@ -1,15 +1,15 @@
 {
-  "name": "Racketeer #012 — Daphne Blue",
+  "name": "Racketeer - Black Beauty with Gold Hardware",
   "slug": "racketeer-012",
   "model": "racketeer",
   "price": 2400,
-  "status": "available",
-  "description": "A stunning Racketeer finished in a lightly aged Daphne Blue nitrocellulose lacquer. Features our custom hand-wound P90s for a fat, articulate midrange that cuts through any mix.",
+  "status": "sold",
+  "description": "Sexy. Black. Features our gold hardware suite.",
   "stripePaymentLink": "https://buy.stripe.com/test_xxxxx1",
   "images": [
-    "../../assets/images/site/available/racketeer-012/racketeer_front-body-dark_01.jpg",
-    "../../assets/images/site/available/racketeer-012/racketeer_back-body_01.jpg",
-    "../../assets/images/site/available/racketeer-012/racketeer_front-full_01.jpg"
+    "../../assets/images/site/available/racketeer-012/images/0.jpg",
+    "../../assets/images/site/available/racketeer-012/images/1.jpg",
+    "../../assets/images/site/available/racketeer-012/images/2.jpg"
   ],
   "specs": {
     "body": "Alder",

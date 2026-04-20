@@ -2,8 +2,10 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { Picture } from "astro:assets";
+import { BUILD_TIERS, formatTierPrice } from "../../data/buildTiers";
 
 const catalog = await getCollection("catalog");
+const tierOneDisplay = formatTierPrice(BUILD_TIERS[0].price);
 ---
 
 <Layout
@@ -65,8 +67,7 @@ const catalog = await getCollection("catalog");
                                             Starts at
                                         </span>
                                         <span class="text-xl text-white font-medium">
-                                            $
-                                            {model.data.startingPrice.toLocaleString()}
+                                            {tierOneDisplay}
                                         </span>
                                     </div>
                                     <a

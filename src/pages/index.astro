@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import { Picture } from "astro:assets";
 import { getCollection } from "astro:content";
+import BuildTierPicker from "../components/BuildTierPicker.astro";
+import { BUILD_TIERS } from "../data/buildTiers";
 import heroImage from "../assets/images/site/Durrant Head Stock Photos/headstock_closeup-front-dark_01.jpg";
 import secondaryImage from "../assets/images/site/catalog/racketeer/racketeer_front-full_01.jpg";
 import thirdImage from "../assets/images/site/catalog/con-artist/con-artist_closeup-fretboard_01.jpg";
@@ -38,13 +40,32 @@ const testimonials = (await getCollection("testimonials")).sort(
             <p class="text-lg md:text-xl text-gray-300 mb-10 tracking-wide font-light max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 100ms;">
                 Authentic to you. What else even matters?
             </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 py-4 animate-fade-in-up" style="animation-delay: 200ms;">
-                <a href="/catalog" class="btn btn-primary w-full sm:w-auto text-sm tracking-widest uppercase font-semibold">
-                    Take a Peek
-                </a>
-                <a href="/create-yours" class="hero-cta-build w-full sm:w-auto">
-                    Start Your Build
-                </a>
+            <div
+                class="flex flex-col items-center justify-center gap-8 py-4 animate-fade-in-up"
+                style="animation-delay: 200ms;"
+            >
+                <BuildTierPicker
+                    idPrefix="home-hero"
+                    externalBuildLinkId="hero-start-build-link"
+                    showTierHeadline={false}
+                    priceClass="text-2xl md:text-3xl text-white font-semibold tabular-nums"
+                    wrapperClass="w-full max-w-sm mx-auto"
+                />
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 w-full">
+                    <a
+                        href="/catalog"
+                        class="btn btn-primary w-full sm:w-auto text-sm tracking-widest uppercase font-semibold"
+                    >
+                        Take a Peek
+                    </a>
+                    <a
+                        id="hero-start-build-link"
+                        href={`/create-yours?tier=${BUILD_TIERS[0].slug}`}
+                        class="hero-cta-build w-full sm:w-auto"
+                    >
+                        Start Your Build
+                    </a>
+                </div>
             </div>
         </div>
     </section>
