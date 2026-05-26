@@ -7,6 +7,8 @@ import react from '@astrojs/react';
 import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 
+const isBuild = process.env.NODE_ENV === 'production' || process.argv.includes('build');
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://durrantguitars.com',
@@ -19,6 +21,6 @@ export default defineConfig({
     svelte(),
     react({ include: ['**/keystatic/**'] }),
     markdoc(),
-    keystatic(),
+    ...(isBuild ? [] : [keystatic()]),
   ]
 });
