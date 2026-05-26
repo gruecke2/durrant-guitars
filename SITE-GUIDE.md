@@ -112,6 +112,51 @@ To update the **workshop masonry grid** on the Gallery page, click "Workshop Pho
 
 ---
 
+## Custom Domain Setup (Squarespace & Surge)
+
+Since we are hosting on Surge and using the custom domain **durrantguitars.com**, a one-time DNS setup is required in your Squarespace domain account:
+
+1. **Log in to Squarespace** and go to your domains dashboard.
+2. Select **durrantguitars.com** and go to **DNS Settings**.
+3. **Add the following records**:
+   - **A Record**:
+     - Host: `@` (or leave blank for root)
+     - Points to: `45.55.110.124` (Surge's IP address)
+   - **CNAME Record**:
+     - Host: `www`
+     - Points to: `na-west1.surge.sh`
+
+*Note: DNS changes can take anywhere from a few minutes to 24 hours to propagate across the internet.*
+
+---
+
+## Setting Up Stripe Checkout Links
+
+To sell guitars in the **Available Inventory** collection:
+
+1. **Log in to your Stripe Dashboard** (ensure you are in **Live Mode**, not Test Mode).
+2. Go to **Payments > Payment Links** and click **New**.
+3. Set up the product details:
+   - **Product Name**: Use the guitar's exact name (e.g. *Con Artist #045*).
+   - **Price**: Enter the guitar's price.
+   - **Image**: (Optional) Upload a photo of the guitar.
+4. Under **Advanced Options** or **After Payment**:
+   - Select **Show confirmation page** or redirect the user back to your site: `https://durrantguitars.com/available`.
+5. Click **Create Link** and copy the resulting URL (e.g., `https://buy.stripe.com/xxxxxx`).
+6. **Paste the Stripe Link into Keystatic**:
+   - Open Keystatic locally (`http://127.0.0.1:4321/keystatic`).
+   - Go to **Available Inventory** and open the guitar entry.
+   - Paste the link into the **Stripe Payment Link** field.
+   - Click **Save**.
+7. **Deploy your changes** using the script (`bash deploy.sh`) to make the "Buy Now" button live.
+
+When a customer buys the guitar:
+1. You will receive an email/notification from Stripe.
+2. Open Keystatic locally, go to **Available Inventory**, select that guitar, and change the **Status** to **Sold**.
+3. Save and run the deploy script to update the site.
+
+---
+
 ## Deploying Your Changes (Making It Live)
 
 After you've made edits in the admin dashboard, you need to **save them to GitHub** and **deploy to Surge** to make them live on the internet.
