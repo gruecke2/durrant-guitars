@@ -112,19 +112,19 @@ To update the **workshop masonry grid** on the Gallery page, click "Workshop Pho
 
 ---
 
-## Custom Domain Setup (Squarespace & Surge)
+## Custom Domain Setup (Squarespace & Vercel)
 
-Since we are hosting on Surge and using the custom domain **durrantguitars.com**, a one-time DNS setup is required in your Squarespace domain account:
+Since we are hosting on Vercel and using the custom domain **durrantguitars.com**, a one-time DNS setup is required in your Squarespace domain account:
 
 1. **Log in to Squarespace** and go to your domains dashboard.
 2. Select **durrantguitars.com** and go to **DNS Settings**.
 3. **Add the following records**:
    - **A Record**:
      - Host: `@` (or leave blank for root)
-     - Points to: `45.55.110.124` (Surge's IP address)
+     - Points to: `76.76.21.21` (Vercel's IP address)
    - **CNAME Record**:
      - Host: `www`
-     - Points to: `na-west1.surge.sh`
+     - Points to: `cname.vercel-dns.com`
 
 *Note: DNS changes can take anywhere from a few minutes to 24 hours to propagate across the internet.*
 
@@ -159,7 +159,7 @@ When a customer buys the guitar:
 
 ## Deploying Your Changes (Making It Live)
 
-After you've made edits in the admin dashboard, you need to **save them to GitHub** and **deploy to Surge** to make them live on the internet.
+After you've made edits in the admin dashboard, you need to **save them to GitHub** and **deploy to Vercel** to make them live on the internet.
 
 ### Option A: Use the Deploy Script (Easiest)
 
@@ -175,10 +175,7 @@ This will:
 2. ✅ Ask for a commit message (or use a default)
 3. ✅ Save changes to Git
 4. ✅ Push to GitHub
-5. ✅ Build the site
-6. ✅ Deploy to Surge
-
-The first time it runs, it'll ask for your Surge domain (e.g., `durrant-guitars.surge.sh`). After that, it remembers.
+5. ✅ Deploy to Vercel
 
 ### Option B: Manual Steps (If You Want More Control)
 
@@ -190,11 +187,8 @@ git commit -m "Updated the Swindler price"
 # 2. Push to GitHub
 git push
 
-# 3. Build the site
-bun run build
-
-# 4. Deploy to Surge
-npx surge dist/client your-domain.surge.sh
+# 3. Deploy to Vercel
+npx vercel --prod
 ```
 
 ---
@@ -225,8 +219,8 @@ npx surge dist/client your-domain.surge.sh
 **"Your local changes would be overwritten"**
 → You have unsaved changes. Run the deploy script first, or `git stash` then `git pull`.
 
-**Surge says "not authorized"**
-→ Run `npx surge login` to log in again.
+**Vercel says "not authorized" or fails to deploy**
+→ Run `npx vercel login` to log in again.
 
 ---
 

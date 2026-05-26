@@ -44,3 +44,4 @@ $RECYCLE.BIN/
 .temp/
 .tmp/
 SURGE_DOMAIN
+.vercel

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ─────────────────────────────────────────────────────
-#  Durrant Guitars — Save & Deploy
+#  Durrant Guitars — Save & Deploy (Vercel CLI)
 #  Run this after making changes in the Keystatic admin
 # ─────────────────────────────────────────────────────
 
@@ -21,60 +21,32 @@ echo ""
 
 # Step 1: Check for changes
 if git diff --quiet && git diff --cached --quiet; then
-    echo -e "${YELLOW}No changes detected. Make some edits first!${NC}"
-    exit 0
-fi
-
-# Show what changed
-echo -e "${YELLOW}📝 Changes detected:${NC}"
-git status --short
-echo ""
-
-# Step 2: Stage and commit
-read -p "Commit message (or press Enter for default): " MSG
-MSG=${MSG:-"Update site content $(date +%Y-%m-%d)"}
-
-git add -A
-git commit -m "$MSG"
-echo ""
-echo -e "${GREEN}✓ Changes saved to Git${NC}"
-
-# Step 3: Push to GitHub
-echo -e "${YELLOW}⬆ Pushing to GitHub...${NC}"
-git push
-echo -e "${GREEN}✓ Pushed to GitHub${NC}"
-echo ""
-
-# Step 4: Build the site
-echo -e "${YELLOW}🔨 Building the site...${NC}"
-bun run build
-echo -e "${GREEN}✓ Build complete${NC}"
-echo ""
-
-# Step 5: Deploy to Surge
-echo -e "${YELLOW}🚀 Deploying to Surge...${NC}"
-
-DEFAULT_DOMAIN="durrant-guitars.surge.sh"
-
-# Use the domain from CNAME if it exists, otherwise use saved or default
-if [ -f "dist/client/CNAME" ]; then
-    DOMAIN=$(cat dist/client/CNAME)
-elif [ -f "SURGE_DOMAIN" ]; then
-    DOMAIN=$(cat SURGE_DOMAIN)
+    echo -e "${YELLOW}No changes detected. Proceeding to deploy current state...${NC}"
 else
-    DOMAIN="$DEFAULT_DOMAIN"
+    # Show what changed
+    echo -e "${YELLOW}📝 Changes detected:${NC}"
+    git status --short
+    echo ""
+
+    # Step 2: Stage and commit
+    read -p "Commit message (or press Enter for default): " MSG
+    MSG=${MSG:-"Update site content $(date +%Y-%m-%d)"}
+
+    git add -A
+    git commit -m "$MSG"
+    echo ""
+    echo -e "${GREEN}✓ Changes saved to Git${NC}"
+
+    # Step 3: Push to GitHub
+    echo -e "${YELLOW}⬆ Pushing to GitHub...${NC}"
+    git push
+    echo -e "${GREEN}✓ Pushed to GitHub${NC}"
+    echo ""
 fi
 
-echo -e "  Deploying to: ${GREEN}${DOMAIN}${NC}"
-read -p "  Press Enter to confirm, or type a different domain: " CUSTOM_DOMAIN
-if [ -n "$CUSTOM_DOMAIN" ]; then
-    DOMAIN="$CUSTOM_DOMAIN"
-fi
-
-npx surge dist/client "$DOMAIN"
-
-# Save for next time
-echo "$DOMAIN" > SURGE_DOMAIN
+# Step 4: Deploy to Vercel
+echo -e "${YELLOW}🚀 Deploying to Vercel...${NC}"
+npx vercel --prod
 
 echo ""
 echo -e "${GREEN}═══════════════════════════════════════${NC}"
