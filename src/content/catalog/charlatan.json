@@ -1,23 +1,19 @@
 {
   "name": "Charlatan",
   "slug": "charlatan",
-  "style": "Double Cut",
-  "tagline": "Sleek and aggressive.",
-  "description": "Tom's personal favorite.",
-  "startingPrice": 1900,
+  "style": "Semi-hollow",
+  "tagline": "Pure superiority.",
+  "description": "Deep down, you’ve always known you were better than everyone else. Playing this guitar proves it.",
+  "startingPrice": 2400,
   "specs": {
-    "body": "Mahogany",
-    "neck": "Mahogany, Slim Taper",
-    "fretboard": "Rosewood",
-    "pickups": "High-output Humbuckers",
-    "bridge": "Tune-O-Matic or Wraparound"
+    "body": "Maple Semi-hollow with Center Block",
+    "neck": "Mahogany, Modern C",
+    "fretboard": "Rosewood or Ebony",
+    "pickups": "Vintage Humbuckers or P90s",
+    "bridge": "Tune-O-Matic or Bigsby"
   },
   "images": [
     "../../assets/images/site/catalog/charlatan/images/0.jpg",
-    "../../assets/images/site/catalog/charlatan/images/1.jpg",
-    "../../assets/images/site/catalog/charlatan/images/2.jpg",
-    "../../assets/images/site/catalog/charlatan/images/3.jpg",
-    "../../assets/images/site/catalog/charlatan/images/4.jpg",
-    "../../assets/images/site/catalog/charlatan/images/5.jpg"
+    "../../assets/images/site/catalog/charlatan/images/1.jpg"
   ]
 }

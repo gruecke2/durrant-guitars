@@ -6,6 +6,7 @@ import heroImage from "../assets/images/site/Durrant Head Stock Photos/headstock
 import secondaryImage from "../assets/images/site/catalog/racketeer/racketeer_front-full_01.jpg";
 import thirdImage from "../assets/images/site/catalog/con-artist/con-artist_closeup-fretboard_01.jpg";
 import tomPhoto from "../assets/images/site/Tom Photos/tom_portrait-studio_01.jpg";
+import grifterFeaturedImage from "../assets/images/site/catalog/grifter/5.jpg";
 
 const testimonials = (await getCollection("testimonials")).sort(
     (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99),
@@ -14,7 +15,10 @@ const testimonials = (await getCollection("testimonials")).sort(
 
 <Layout title="Custom Handcrafted Guitars">
     <!-- Hero Section -->
-    <section id="hero-section" class="relative min-h-[90vh] bg-black flex items-center justify-center overflow-hidden">
+    <section
+        id="hero-section"
+        class="relative min-h-[90vh] bg-black flex items-center justify-center overflow-hidden"
+    >
         <!-- Image Container -->
         <div class="absolute inset-0 z-0 bg-black">
             <Picture
@@ -26,20 +30,41 @@ const testimonials = (await getCollection("testimonials")).sort(
                 class="w-full h-full object-cover hero-img"
                 loading="eager"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-background/100 via-background/40 to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-background/90 via-transparent to-background/30"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-background/100 via-background/40 to-transparent"
+            >
+            </div>
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-background/90 via-transparent to-background/30"
+            >
+            </div>
         </div>
 
         <!-- Content Container -->
-        <div class="relative z-10 container mx-auto text-center px-4 max-w-4xl pt-20">
-            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 animate-fade-in-up">
-                Precision, <br /><span class="text-gray-300 italic">With Personality</span>
+        <div
+            class="relative z-10 container mx-auto text-center px-4 max-w-4xl pt-20"
+        >
+            <h1
+                class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 animate-fade-in-up"
+            >
+                Precision, <br /><span class="text-gray-300 italic"
+                    >With Personality</span
+                >
             </h1>
-            <p class="text-lg md:text-xl text-gray-300 mb-10 tracking-wide font-light max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 100ms;">
+            <p
+                class="text-lg md:text-xl text-gray-300 mb-10 tracking-wide font-light max-w-2xl mx-auto animate-fade-in-up"
+                style="animation-delay: 100ms;"
+            >
                 Authentic to you. What else even matters?
             </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 py-4 animate-fade-in-up" style="animation-delay: 200ms;">
-                <a href="/catalog" class="btn btn-primary w-full sm:w-auto text-sm tracking-widest uppercase font-semibold">
+            <div
+                class="flex flex-col sm:flex-row items-center justify-center gap-6 py-4 animate-fade-in-up"
+                style="animation-delay: 200ms;"
+            >
+                <a
+                    href="/catalog"
+                    class="btn btn-primary w-full sm:w-auto text-sm tracking-widest uppercase font-semibold"
+                >
                     Take a Peek
                 </a>
                 <a href="/create-yours" class="hero-cta-build w-full sm:w-auto">
@@ -64,7 +89,8 @@ const testimonials = (await getCollection("testimonials")).sort(
             <p
                 class="text-gray-400 text-lg md:text-xl leading-relaxed font-light slide-in-left delay-200"
             >
-                It’s your guitar. It should be exactly what you want it to be. Keep it classy. Or don’t. IDGAF.
+                It’s your guitar. It should be exactly what you want it to be.
+                Keep it classy. Or don’t. IDGAF.
             </p>
         </div>
     </section>
@@ -100,15 +126,15 @@ const testimonials = (await getCollection("testimonials")).sort(
                 <!-- Featured Card 1 -->
                 <a
                     href="/catalog/grifter"
-                    class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-surface-light slide-in-left delay-100"
+                    class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-black slide-in-left delay-100"
                 >
                     <Picture
-                        src={heroImage}
+                        src={grifterFeaturedImage}
                         alt="The Grifter"
                         widths={[400, 600, 800]}
                         sizes="(max-width: 768px) 100vw, 50vw"
                         formats={["avif", "webp"]}
-                        class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
+                        class="absolute inset-0 w-full h-full object-contain p-6 opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
                     />
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"
@@ -134,7 +160,7 @@ const testimonials = (await getCollection("testimonials")).sort(
                 <!-- Featured Card 2 -->
                 <a
                     href="/catalog/racketeer"
-                    class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-surface-light slide-in-right delay-200"
+                    class="group block relative overflow-hidden rounded-sm aspect-[4/5] md:aspect-square bg-black slide-in-right delay-200"
                 >
                     <Picture
                         src={secondaryImage}
@@ -142,7 +168,7 @@ const testimonials = (await getCollection("testimonials")).sort(
                         widths={[400, 600, 800]}
                         sizes="(max-width: 768px) 100vw, 50vw"
                         formats={["avif", "webp"]}
-                        class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
+                        class="absolute inset-0 w-full h-full object-contain p-6 opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
                     />
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"
@@ -276,7 +302,9 @@ const testimonials = (await getCollection("testimonials")).sort(
                     <p
                         class="text-gray-400 text-lg leading-relaxed font-light mb-8"
                     >
-                        I play music, build things, and don’t take direction well. That’s how I got here. I’m a masterbuilder and I masterbuild all over every guitar I make. 
+                        I play music, build things, and don’t take direction
+                        well. That’s how I got here. I’m a masterbuilder and I
+                        masterbuild all over every guitar I make.
                     </p>
                     <a
                         href="/about"
@@ -294,19 +322,36 @@ const testimonials = (await getCollection("testimonials")).sort(
     </section>
 
     <!-- Philosophy Section -->
-    <section class="py-32 relative bg-black overflow-hidden flex items-center justify-center text-center px-4">
+    <section
+        class="py-32 relative bg-black overflow-hidden flex items-center justify-center text-center px-4"
+    >
         <div class="absolute inset-0 z-0 opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-tr from-[#b20404]/30 to-transparent"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-tr from-[#b20404]/30 to-transparent"
+            >
+            </div>
             <!-- noisy bg -->
-            <div class="absolute inset-0 bg-noise opacity-30 mix-blend-overlay pointer-events-none"></div>
+            <div
+                class="absolute inset-0 bg-noise opacity-30 mix-blend-overlay pointer-events-none"
+            >
+            </div>
         </div>
-        <div class="relative z-10 max-w-4xl mx-auto p-10 md:p-16 border border-white/10 bg-white/[0.02] backdrop-blur-md rounded-sm slide-in-left">
-            <h2 class="font-serif text-3xl md:text-5xl text-white mb-6 tracking-wide">
+        <div
+            class="relative z-10 max-w-4xl mx-auto p-10 md:p-16 border border-white/10 bg-white/[0.02] backdrop-blur-md rounded-sm slide-in-left"
+        >
+            <h2
+                class="font-serif text-3xl md:text-5xl text-white mb-6 tracking-wide"
+            >
                 The Durrant Philosophy
             </h2>
             <div class="w-16 h-1 bg-accent mx-auto mb-10"></div>
-            <p class="text-xl md:text-3xl font-light text-gray-300 leading-relaxed italic font-serif">
-                "Your guitar shouldn’t fight you, it should beg for your touch. A great instrument lures you in, does things you never dreamed of, and makes you think it was your idea. You’ll soon realize your old guitars were faking it."
+            <p
+                class="text-xl md:text-3xl font-light text-gray-300 leading-relaxed italic font-serif"
+            >
+                "Your guitar shouldn’t fight you, it should beg for your touch.
+                A great instrument lures you in, does things you never dreamed
+                of, and makes you think it was your idea. You’ll soon realize
+                your old guitars were faking it."
             </p>
         </div>
     </section>

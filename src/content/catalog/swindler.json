@@ -3,19 +3,18 @@
   "slug": "swindler",
   "style": "Strat",
   "tagline": "Is there anything more iconic? It’s literally the guitar emoji",
-  "description": "Strat style body, classic and cool.",
+  "description": "No one has sent me a letter threatening legal action yet…",
   "startingPrice": 1850,
   "specs": {
     "body": "Alder or Swamp Ash",
     "neck": "Maple, Modern C",
     "fretboard": "Maple or Rosewood",
     "pickups": "S-S-S or H-S-S",
-    "bridge": "Hardtail"
+    "bridge": "Tremolo"
   },
   "images": [
     "../../assets/images/site/catalog/swindler/images/0.jpg",
     "../../assets/images/site/catalog/swindler/images/1.jpg",
-    "../../assets/images/site/catalog/swindler/images/2.jpg",
-    "../../assets/images/site/catalog/swindler/images/3.jpg"
+    "../../assets/images/site/catalog/swindler/images/2.jpg"
   ]
 }

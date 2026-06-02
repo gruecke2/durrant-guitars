@@ -1,43 +1,57 @@
-# Astro Starter Kit: Minimal
+# Durrant Guitars Website
 
-```sh
-npm create astro@latest -- --template minimal
-```
+A modern, high-performance static website for Durrant Guitars. Built with **Astro**, styled with **Tailwind CSS**, integrated with Svelte and React, and managed using **Keystatic CMS** (local file-based workflow) with deployment on **Vercel**.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Stack Overview
 
-## 🚀 Project Structure
+*   **Framework**: Astro (Static Site Generation)
+*   **Styling**: Tailwind CSS (v4)
+*   **Components**: Svelte (interactive components), React (Keystatic Admin wrapper)
+*   **Content Management**: Keystatic CMS (local mode, saves contents as JSON/Markdoc directly in the source directory)
+*   **Hosting & CDN**: Vercel (CLI-based deployments)
 
-Inside of your Astro project, you'll see the following folders and files:
+---
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 🛠️ Development & Deployment
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+To start editing the site or updating content locally:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1.  **Start Local server**:
+    ```bash
+    bun dev
+    ```
+2.  **Open CMS Panel**:
+    Go to `http://127.0.0.1:4321/keystatic` to edit collections (Guitars, Galleries, Testimonials).
+3.  **Deploy Changes**:
+    Run the deploy script to push content to GitHub and publish to `durrantguitars.com`:
+    ```bash
+    bash deploy.sh
+    ```
 
-Any static assets, like images, can be placed in the `public/` directory.
+For full editing details, DNS specs, and Stripe tutorials, see [SITE-GUIDE.md](file:///c:/dev/durrant-guitars/SITE-GUIDE.md).
 
-## 🧞 Commands
+---
 
-All commands are run from the root of the project, from a terminal:
+## 📋 Project Roadmap & TODOs
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Here are the upcoming milestones and feature backlogs for the Durrant Guitars platform:
 
-## 👀 Want to learn more?
+### 💳 E-Commerce & Stripe Integration
+*   [ ] **Production Checkout Flow**: Audit and replace test Stripe Payment Links with production payment links in Keystatic's "Available Inventory" collection.
+*   [ ] **Redirect Pages**: Configure Stripe checkouts to redirect users to a clean confirmation/thank-you page (e.g. `https://durrantguitars.com/thank-you`) after successful transactions.
+*   [ ] **Down Payments for Custom Builds**: Implement a deposit payment system for custom guitar configurations built in the "Create Yours" page.
+    *   Create a "Pay Deposit" checkout flow using a dedicated Stripe Deposit Product.
+    *   Integrate a Stripe link or button into the custom build summary screen.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### 🛡️ Security & Spam Protection
+*   [ ] **Contact Form Captcha**: Implement anti-spam security (such as Cloudflare Turnstile or Google reCAPTCHA) on the custom contact and inquiry forms to prevent automated submission spam.
+*   [ ] **Form Fields Audit**: Clean up and validate contact inputs on `/contact` and `/create-yours` endpoints.
+
+### 🔍 SEO & Meta Enhancements
+*   [ ] **SEO Meta Audit**: Audit and add descriptive `<title>` and `<meta name="description">` tags for every static page.
+*   [ ] **Sitemap & Robots**: Ensure `sitemap.xml` and `robots.txt` are generated and correctly reference `https://durrantguitars.com`.
+*   [ ] **Social Cards**: Configure Open Graph (`og:image`, `og:title`) metadata for high-quality preview cards on platforms like Instagram and Twitter.
+
+### 🎸 Product Configuration Alignment
+*   [ ] **Model Synch**: Align the catalog model options (Grifter, Swindler, Racketeer, Con Artist, etc.) in `src/content/catalog/` with actual product specs.
+*   [ ] **Asset Import**: Synchronize model images and build specifications with the current asset drive (Photos in Google Drive).
